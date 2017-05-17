@@ -7,7 +7,7 @@
 #include "socal/hps.h"
 #include "socal/alt_gpio.h"
 #include "hps_0.h"
-#include "can.hpp"
+#include "i2c.hpp"
 #include <limits.h>
 
 #define HW_REGS_BASE ( ALT_STM_OFST )
@@ -18,10 +18,7 @@ int main(int argc, char *argv[]) {
 
 	void *virtual_base;
 	int fd;
-	int loop_count;
-	int led_direction = 0;
-	int led_mask = 0x01;
-	void *h2p_lw_led_addr, *h2p_lw_uart_addr;
+	void *h2p_lw_i2c_addr;
 
 	// map the address space for the LED registers into user space so we can interact with them.
 	// we'll actually map in the entire CSR span of the HPS since we want to access various registers within that span
@@ -39,107 +36,54 @@ int main(int argc, char *argv[]) {
 		return( 1 );
 	}
 	
-	h2p_lw_led_addr=virtual_base + ( ( unsigned long  )( ALT_LWFPGASLVS_OFST + LED_PIO_BASE ) & ( unsigned long)( HW_REGS_MASK ) );
-	h2p_lw_uart_addr=virtual_base + ( ( unsigned long  )( ALT_LWFPGASLVS_OFST + RS232_0_BASE ) & ( unsigned long)( HW_REGS_MASK ) );
+	h2p_lw_i2c_addr = virtual_base + ( (unsigned long) ( ALT_LWFPGASLVS_OFST + I2C_AVALON_BRIDGE_0_BASE ) & (unsigned long) ( HW_REGS_MASK ) );
 
 
-	printf("Start CAN operation:\n");
-	      unsigned int temp;
+	///////////////
+	/*
+	 * WRITE
+	 * 0: addr <= writedata;
+	 * 1: data_wr <= writedata;
+	 * 2: rw <= writedata;
+	 * 3: ena <= writedata;
+	 */
 
-	      read_status(h2p_lw_can_addr);
-	      read_mode(h2p_lw_can_addr);
-//	      reset_mode(h2p_lw_can_addr);
-	      read_interrupt_enable_register(h2p_lw_can_addr);
-	      read_acceptance_code_register(h2p_lw_can_addr);
-	      read_acceptance_mask_register(h2p_lw_can_addr);
-//	      read_status(h2p_lw_can_addr);
-//
-//		  uint8_t can_tx[8];
-//		  can_tx[0]= 0x01;
-//		  can_tx[1]= 0x02;
-//		  can_tx[2]= 0x03;
-//		  can_tx[3]= 0x04;
-//		  can_tx[4]= 0x05;
-//		  can_tx[5]= 0x06;
-//		  can_tx[6]= 0x07;
-//		  can_tx[7]= 0x08;
-////
-//		  send_msg(h2p_lw_can_addr, can_tx, 0x0001, 0x08, 0);
-//
-	      uint8_t status;
-	      do
-		  {
-//	    	  IOWR(h2p_lw_can_addr,1,1);
-			  status = read_status(h2p_lw_can_addr);
-//			  if((status&0x40)){
-//				  read_error_capture_register(h2p_lw_can_addr);
-//				  reset_mode(h2p_lw_can_addr);
-//				  usleep(1000000);
-//			  }
-			  read_regs_can(h2p_lw_can_addr);
-			  usleep(100000);
+	/*
+	 * READ
+	 * 	((address == 0))? addr :
+	 * 	((address == 1))? data_rd :
+	 * 	((address == 2))? rw :
+	 * 	((address == 3))? ena :
+	 * 	((address == 4))? busy :
+	 * 	((address == 5))? ack_error :
+	 */
 
-		  }while(status != 0x4);
+	I2C* i2c = new I2C(h2p_lw_i2c_addr);
+
+	// write
+	for (int i = 0; i < 10; i++) {
+		i2c->i2cWrite(i, i);
+		printf("wait\n");
+	}
+
+	// read
+	//char read = i2c->i2cRead(3);
+	//printf("%X\n", read);
+
+	delete i2c;
 
 
 
-//	      send_msg(h2p_lw_can_addr, can_tx, 0x0001, 0x08, 0);
-//	      receive_msg(h2p_lw_can_addr, can_tx, 0x0001, 0x08);
-//
-//	      reset_mode(h2p_lw_can_addr);
-//	      read_regs_can(h2p_lw_can_addr);
-//	      op_mode(h2p_lw_can_addr);
-//	      read_regs_can(h2p_lw_can_addr);
-//
-//	      send_msg(h2p_lw_can_addr, can_tx, 0x0001, 0x08, 0);
-//	      read_regs_can(h2p_lw_can_addr);
-//	      read_status(h2p_lw_can_addr);
-
-//	unsigned int temp;
-//	  int i = 0;
-//	  printf("Control Register \n");
-//	  temp = IORD(h2p_lw_can_addr,0x0000);
-//	  printf("%u : R %u \n",i,temp);
-//	  printf("Goint to OP mode \n");
-//	   IOWR_32DIRECT(h2p_lw_can_addr,0,32);
-//	   temp = IORD_32DIRECT(h2p_lw_can_addr,0x0000);
-//	   printf("%u : R %u \n",i,temp);
-//	  /*printf("Goint to reset mode \n");
-//	  IOWR_32DIRECT(h2p_lw_can_addr,0,32);
-//	  temp = IORD_32DIRECT(h2p_lw_can_addr,0x0000);
-//	  printf("%u : R %u \n",i,temp); */
-//	  printf("Double check \n");
-//	  temp = IORD(h2p_lw_can_addr,0x0000);
-//	  printf("%u : R %u \n",i,temp);
-//	  printf("Read Clock Divider Reg \n");
-//	  i=31;
-//	  temp = IORD(h2p_lw_can_addr,31);
-//	  printf("%u : R %u \n",i,temp);
-//	  printf("Set it to extended mode \n");
-//	  IOWR(h2p_lw_can_addr,31,128);
-//	  temp = IORD(h2p_lw_can_addr,31);
-//	  printf("%u : R %u \n",i,temp);
-//	  printf("And back \n");
-//	  IOWR(h2p_lw_can_addr,31,0);
-//	    temp = IORD(h2p_lw_can_addr,31);
-//	    printf("%u : R %u \n",i,temp);
-//	  for(i = 1; i < 32; i++) {
-//		  IOWR_32DIRECT(h2p_lw_can_addr,i*4,0);
-//		  temp = IORD_32DIRECT(h2p_lw_can_addr,i*4);
-//		  printf("%u: R %u \n",i,temp);
-//	  }
-//	  printf("Goint to reset mode \n");
-//	  IOWR_32DIRECT(h2p_lw_can_addr,0,33);
-//	  temp = IORD_32DIRECT(h2p_lw_can_addr,0x0000);
-//	  printf("%u : R %u \n",i,temp);
-//	  printf("Double check \n");
-//	  temp = IORD(h2p_lw_can_addr,0x0000);
-//	  for(i = 1; i < 32; i++) {
-//	  	  IOWR_32DIRECT(h2p_lw_can_addr,i*4,0);
-//	  	  temp = IORD_32DIRECT(h2p_lw_can_addr,i*4);
-//	  	  printf("%u: R %u \n",i,temp);
-//	    }
-//	  printf("\nDONE");
+//	uint8_t reg;
+//	write_control_register(h2p_lw_i2c_addr, 0b00000000);
+//	IOWR(h2p_lw_i2c_addr, PRERlo, 0x0063);
+//	read_prescaler_register(h2p_lw_i2c_addr);
+//	write_control_register(h2p_lw_i2c_addr, 0b10000000);
+//	read_control_register(h2p_lw_i2c_addr);
+//	write_transmit_register(h2p_lw_i2c_addr, 0b11000001);
+//	write_command_register(h2p_lw_i2c_addr, 0b01010000);
+//	read_control_register(h2p_lw_i2c_addr);
+//	read_status_register(h2p_lw_i2c_addr);
 
 	// clean up our memory mapping and exit
 	if( munmap( virtual_base, HW_REGS_SPAN ) != 0 ) {

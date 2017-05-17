@@ -1,5 +1,5 @@
 Flow report for soc_system
-Wed May 10 16:35:31 2017
+Wed May 17 13:14:38 2017
 Quartus Prime Version 16.1.2 Build 203 01/18/2017 SJ Lite Edition
 
 
@@ -41,18 +41,18 @@ agreement for further details.
 +-------------------------------------------------------------------------------+
 ; Flow Summary                                                                  ;
 +---------------------------------+---------------------------------------------+
-; Flow Status                     ; Successful - Wed May 10 16:35:31 2017       ;
+; Flow Status                     ; Successful - Wed May 17 13:14:38 2017       ;
 ; Quartus Prime Version           ; 16.1.2 Build 203 01/18/2017 SJ Lite Edition ;
 ; Revision Name                   ; soc_system                                  ;
 ; Top-level Entity Name           ; ghrd                                        ;
 ; Family                          ; Cyclone V                                   ;
 ; Device                          ; 5CSEMA4U23C6                                ;
 ; Timing Models                   ; Final                                       ;
-; Logic utilization (in ALMs)     ; 3,294 / 15,880 ( 21 % )                     ;
-; Total registers                 ; 4721                                        ;
+; Logic utilization (in ALMs)     ; 2,607 / 15,880 ( 16 % )                     ;
+; Total registers                 ; 4006                                        ;
 ; Total pins                      ; 230 / 314 ( 73 % )                          ;
 ; Total virtual pins              ; 0                                           ;
-; Total block memory bits         ; 527,360 / 2,764,800 ( 19 % )                ;
+; Total block memory bits         ; 526,336 / 2,764,800 ( 19 % )                ;
 ; Total DSP Blocks                ; 0 / 84 ( 0 % )                              ;
 ; Total HSSI RX PCSs              ; 0                                           ;
 ; Total HSSI PMA RX Deserializers ; 0                                           ;
@@ -68,7 +68,7 @@ agreement for further details.
 +-------------------+---------------------+
 ; Option            ; Setting             ;
 +-------------------+---------------------+
-; Start date & time ; 05/10/2017 16:30:18 ;
+; Start date & time ; 05/17/2017 13:09:34 ;
 ; Main task         ; Compilation         ;
 ; Revision Name     ; soc_system          ;
 +-------------------+---------------------+
@@ -79,7 +79,7 @@ agreement for further details.
 +---------------------------------------+--------------------------------------------------------------------------+---------------+--------------------------------+------------+
 ; Assignment Name                       ; Value                                                                    ; Default Value ; Entity Name                    ; Section Id ;
 +---------------------------------------+--------------------------------------------------------------------------+---------------+--------------------------------+------------+
-; COMPILER_SIGNATURE_ID                 ; 84440842494223.149442661806184                                           ; --            ; --                             ; --         ;
+; COMPILER_SIGNATURE_ID                 ; 84440842494223.149501937110997                                           ; --            ; --                             ; --         ;
 ; ECO_REGENERATE_REPORT                 ; On                                                                       ; Off           ; --                             ; --         ;
 ; HPS_ISW_FILE                          ; soc_system/synthesis/submodules/sequencer/system.pre.h                   ; --            ; soc_system_hps_0_hps_io_border ; --         ;
 ; HPS_ISW_FILE                          ; soc_system/synthesis/submodules/sequencer/tclrpt.pre.h                   ; --            ; soc_system_hps_0_hps_io_border ; --         ;
@@ -121,7 +121,7 @@ agreement for further details.
 ; POWER_PRESET_COOLING_SOLUTION         ; 23 MM HEAT SINK WITH 200 LFPM AIRFLOW                                    ; --            ; --                             ; --         ;
 ; SLD_FILE                              ; soc_system/synthesis/soc_system.regmap                                   ; --            ; --                             ; --         ;
 ; SLD_FILE                              ; soc_system/synthesis/soc_system.debuginfo                                ; --            ; --                             ; --         ;
-; SLD_INFO                              ; QSYS_NAME soc_system HAS_SOPCINFO 1 GENERATION_ID 1494426319             ; --            ; --                             ; --         ;
+; SLD_INFO                              ; QSYS_NAME soc_system HAS_SOPCINFO 1 GENERATION_ID 1495019270             ; --            ; --                             ; --         ;
 ; SOPCINFO_FILE                         ; soc_system/synthesis/../../soc_system.sopcinfo                           ; --            ; --                             ; --         ;
 ; SYNTHESIS_ONLY_QIP                    ; On                                                                       ; --            ; --                             ; --         ;
 ; TOP_LEVEL_ENTITY                      ; ghrd                                                                     ; soc_system    ; --                             ; --         ;
@@ -134,10 +134,10 @@ agreement for further details.
 +----------------------+--------------+-------------------------+---------------------+------------------------------------+
 ; Module Name          ; Elapsed Time ; Average Processors Used ; Peak Virtual Memory ; Total CPU Time (on all processors) ;
 +----------------------+--------------+-------------------------+---------------------+------------------------------------+
-; Analysis & Synthesis ; 00:00:44     ; 1.7                     ; 1445 MB             ; 00:01:33                           ;
-; Fitter               ; 00:01:30     ; 1.2                     ; 2754 MB             ; 00:02:58                           ;
-; Assembler            ; 00:00:09     ; 1.0                     ; 1062 MB             ; 00:00:08                           ;
-; Total                ; 00:02:23     ; --                      ; --                  ; 00:04:39                           ;
+; Analysis & Synthesis ; 00:00:35     ; 1.0                     ; 1433 MB             ; 00:01:00                           ;
+; Fitter               ; 00:01:22     ; 1.2                     ; 2753 MB             ; 00:02:34                           ;
+; Assembler            ; 00:00:08     ; 1.0                     ; 1067 MB             ; 00:00:08                           ;
+; Total                ; 00:02:05     ; --                      ; --                  ; 00:03:42                           ;
 +----------------------+--------------+-------------------------+---------------------+------------------------------------+
 
 
@@ -157,7 +157,7 @@ agreement for further details.
 ------------
 quartus_map --read_settings_files=on --write_settings_files=off soc_system -c soc_system
 quartus_fit --read_settings_files=off --write_settings_files=off soc_system -c soc_system
-quartus_asm --read_settings_files=off --write_settings_files=off soc_system -c soc_system
+quartus_asm --read_settings_files=on --write_settings_files=off soc_system -c soc_system
 
 
 

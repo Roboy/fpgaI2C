@@ -1,115 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <SopcSystem>
  <!-- An entire SOPC Builder system -->
- <!-- 2017.05.10.16:52:34 -->
+ <!-- 2017.05.17.11:24:16 -->
  <name>soc_system</name>
  <version>1.0</version>
  <sopcVersion>1.0</sopcVersion>
  <deviceFamily>Cyclone V</deviceFamily>
  <sopcSimulationEnabled>false</sopcSimulationEnabled>
  <module>
-  <name>button_pio</name>
-  <version>16.1</version>
-  <assignment>
-   <name>embeddedsw.CMacro.BIT_CLEARING_EDGE_REGISTER</name>
-   <value>1</value>
-  </assignment>
-  <assignment>
-   <name>embeddedsw.CMacro.BIT_MODIFYING_OUTPUT_REGISTER</name>
-   <value>0</value>
-  </assignment>
-  <assignment>
-   <name>embeddedsw.CMacro.CAPTURE</name>
-   <value>1</value>
-  </assignment>
-  <assignment>
-   <name>embeddedsw.CMacro.DATA_WIDTH</name>
-   <value>4</value>
-  </assignment>
-  <assignment>
-   <name>embeddedsw.CMacro.DO_TEST_BENCH_WIRING</name>
-   <value>0</value>
-  </assignment>
-  <assignment>
-   <name>embeddedsw.CMacro.DRIVEN_SIM_VALUE</name>
-   <value>0</value>
-  </assignment>
-  <assignment>
-   <name>embeddedsw.CMacro.EDGE_TYPE</name>
-   <value>FALLING</value>
-  </assignment>
-  <assignment>
-   <name>embeddedsw.CMacro.FREQ</name>
-   <value>50000000</value>
-  </assignment>
-  <assignment>
-   <name>embeddedsw.CMacro.HAS_IN</name>
-   <value>1</value>
-  </assignment>
-  <assignment>
-   <name>embeddedsw.CMacro.HAS_OUT</name>
-   <value>0</value>
-  </assignment>
-  <assignment>
-   <name>embeddedsw.CMacro.HAS_TRI</name>
-   <value>0</value>
-  </assignment>
-  <assignment>
-   <name>embeddedsw.CMacro.IRQ_TYPE</name>
-   <value>EDGE</value>
-  </assignment>
-  <assignment>
-   <name>embeddedsw.CMacro.RESET_VALUE</name>
-   <value>0</value>
-  </assignment>
-  <assignment>
-   <name>embeddedsw.dts.compatible</name>
-   <value>altr,pio-1.0</value>
-  </assignment>
-  <assignment>
-   <name>embeddedsw.dts.group</name>
-   <value>gpio</value>
-  </assignment>
-  <assignment>
-   <name>embeddedsw.dts.name</name>
-   <value>pio</value>
-  </assignment>
-  <assignment>
-   <name>embeddedsw.dts.params.altr,gpio-bank-width</name>
-   <value>4</value>
-  </assignment>
-  <assignment>
-   <name>embeddedsw.dts.params.altr,interrupt-type</name>
-   <value>2</value>
-  </assignment>
-  <assignment>
-   <name>embeddedsw.dts.params.altr,interrupt_type</name>
-   <value>2</value>
-  </assignment>
-  <assignment>
-   <name>embeddedsw.dts.params.edge_type</name>
-   <value>1</value>
-  </assignment>
-  <assignment>
-   <name>embeddedsw.dts.params.level_trigger</name>
-   <value>0</value>
-  </assignment>
-  <assignment>
-   <name>embeddedsw.dts.params.resetvalue</name>
-   <value>0</value>
-  </assignment>
-  <assignment>
-   <name>embeddedsw.dts.vendor</name>
-   <value>altr</value>
-  </assignment>
-  <className>altera_avalon_pio</className>
+  <name>I2C_avalon_bridge_0</name>
+  <version>1.0</version>
+  <className>I2C_avalon_bridge</className>
   <clockConnection>
-   <moduleName>button_pio</moduleName>
-   <localSlaveName>clk</localSlaveName>
-   <systemConnectionName>button_pio.clk</systemConnectionName>
-   <frequency>50000000</frequency>
+   <moduleName>I2C_avalon_bridge_0</moduleName>
+   <localSlaveName>clock_sink</localSlaveName>
+   <systemConnectionName>I2C_avalon_bridge_0.clock_sink</systemConnectionName>
+   <frequency>0</frequency>
   </clockConnection>
-  <path>button_pio</path>
+  <path>I2C_avalon_bridge_0</path>
  </module>
  <module>
   <name>clk_0</name>
@@ -128,110 +36,6 @@
    <frequency>50000000</frequency>
   </clockConnection>
   <path>clk_0</path>
- </module>
- <module>
-  <name>dipsw_pio</name>
-  <version>16.1</version>
-  <assignment>
-   <name>embeddedsw.CMacro.BIT_CLEARING_EDGE_REGISTER</name>
-   <value>1</value>
-  </assignment>
-  <assignment>
-   <name>embeddedsw.CMacro.BIT_MODIFYING_OUTPUT_REGISTER</name>
-   <value>0</value>
-  </assignment>
-  <assignment>
-   <name>embeddedsw.CMacro.CAPTURE</name>
-   <value>1</value>
-  </assignment>
-  <assignment>
-   <name>embeddedsw.CMacro.DATA_WIDTH</name>
-   <value>4</value>
-  </assignment>
-  <assignment>
-   <name>embeddedsw.CMacro.DO_TEST_BENCH_WIRING</name>
-   <value>0</value>
-  </assignment>
-  <assignment>
-   <name>embeddedsw.CMacro.DRIVEN_SIM_VALUE</name>
-   <value>0</value>
-  </assignment>
-  <assignment>
-   <name>embeddedsw.CMacro.EDGE_TYPE</name>
-   <value>ANY</value>
-  </assignment>
-  <assignment>
-   <name>embeddedsw.CMacro.FREQ</name>
-   <value>50000000</value>
-  </assignment>
-  <assignment>
-   <name>embeddedsw.CMacro.HAS_IN</name>
-   <value>1</value>
-  </assignment>
-  <assignment>
-   <name>embeddedsw.CMacro.HAS_OUT</name>
-   <value>0</value>
-  </assignment>
-  <assignment>
-   <name>embeddedsw.CMacro.HAS_TRI</name>
-   <value>0</value>
-  </assignment>
-  <assignment>
-   <name>embeddedsw.CMacro.IRQ_TYPE</name>
-   <value>EDGE</value>
-  </assignment>
-  <assignment>
-   <name>embeddedsw.CMacro.RESET_VALUE</name>
-   <value>0</value>
-  </assignment>
-  <assignment>
-   <name>embeddedsw.dts.compatible</name>
-   <value>altr,pio-1.0</value>
-  </assignment>
-  <assignment>
-   <name>embeddedsw.dts.group</name>
-   <value>gpio</value>
-  </assignment>
-  <assignment>
-   <name>embeddedsw.dts.name</name>
-   <value>pio</value>
-  </assignment>
-  <assignment>
-   <name>embeddedsw.dts.params.altr,gpio-bank-width</name>
-   <value>4</value>
-  </assignment>
-  <assignment>
-   <name>embeddedsw.dts.params.altr,interrupt-type</name>
-   <value>3</value>
-  </assignment>
-  <assignment>
-   <name>embeddedsw.dts.params.altr,interrupt_type</name>
-   <value>3</value>
-  </assignment>
-  <assignment>
-   <name>embeddedsw.dts.params.edge_type</name>
-   <value>2</value>
-  </assignment>
-  <assignment>
-   <name>embeddedsw.dts.params.level_trigger</name>
-   <value>0</value>
-  </assignment>
-  <assignment>
-   <name>embeddedsw.dts.params.resetvalue</name>
-   <value>0</value>
-  </assignment>
-  <assignment>
-   <name>embeddedsw.dts.vendor</name>
-   <value>altr</value>
-  </assignment>
-  <className>altera_avalon_pio</className>
-  <clockConnection>
-   <moduleName>dipsw_pio</moduleName>
-   <localSlaveName>clk</localSlaveName>
-   <systemConnectionName>dipsw_pio.clk</systemConnectionName>
-   <frequency>50000000</frequency>
-  </clockConnection>
-  <path>dipsw_pio</path>
  </module>
  <module>
   <name>fpga_only_master</name>
@@ -308,123 +112,6 @@
     <baseAddress>65536</baseAddress>
     <basePhysicalAddress>65536</basePhysicalAddress>
     <span>8</span>
-    <isBigEndian>false</isBigEndian>
-    <isInstructionAccessible>false</isInstructionAccessible>
-    <isDataAccessible>false</isDataAccessible>
-    <isTightlyCoupledInstructionAccessible>false</isTightlyCoupledInstructionAccessible>
-    <isTightlyCoupledDataAccessible>false</isTightlyCoupledDataAccessible>
-    <hasIrq>false</hasIrq>
-    <irqNumber>-1</irqNumber>
-    <irqInterruptControllerID>-1</irqInterruptControllerID>
-    <isConnectedInterruptControllerDevice>false</isConnectedInterruptControllerDevice>
-    <interruptControllerID>-1</interruptControllerID>
-   </connectedDevice>
-   <connectedDevice>
-    <moduleName>led_pio</moduleName>
-    <slaveDesc>led_pio</slaveDesc>
-    <slave>
-     <name>s1</name>
-     <version>16.1</version>
-     <assignment>
-      <name>embeddedsw.configuration.isFlash</name>
-      <value>0</value>
-     </assignment>
-     <assignment>
-      <name>embeddedsw.configuration.isMemoryDevice</name>
-      <value>0</value>
-     </assignment>
-     <assignment>
-      <name>embeddedsw.configuration.isNonVolatileStorage</name>
-      <value>0</value>
-     </assignment>
-     <assignment>
-      <name>embeddedsw.configuration.isPrintableDevice</name>
-      <value>0</value>
-     </assignment>
-     <systemSlaveName>led_pio.s1</systemSlaveName>
-     <addressGroup>0</addressGroup>
-    </slave>
-    <baseAddress>65600</baseAddress>
-    <basePhysicalAddress>65600</basePhysicalAddress>
-    <span>16</span>
-    <isBigEndian>false</isBigEndian>
-    <isInstructionAccessible>false</isInstructionAccessible>
-    <isDataAccessible>false</isDataAccessible>
-    <isTightlyCoupledInstructionAccessible>false</isTightlyCoupledInstructionAccessible>
-    <isTightlyCoupledDataAccessible>false</isTightlyCoupledDataAccessible>
-    <hasIrq>false</hasIrq>
-    <irqNumber>-1</irqNumber>
-    <irqInterruptControllerID>-1</irqInterruptControllerID>
-    <isConnectedInterruptControllerDevice>false</isConnectedInterruptControllerDevice>
-    <interruptControllerID>-1</interruptControllerID>
-   </connectedDevice>
-   <connectedDevice>
-    <moduleName>dipsw_pio</moduleName>
-    <slaveDesc>dipsw_pio</slaveDesc>
-    <slave>
-     <name>s1</name>
-     <version>16.1</version>
-     <assignment>
-      <name>embeddedsw.configuration.isFlash</name>
-      <value>0</value>
-     </assignment>
-     <assignment>
-      <name>embeddedsw.configuration.isMemoryDevice</name>
-      <value>0</value>
-     </assignment>
-     <assignment>
-      <name>embeddedsw.configuration.isNonVolatileStorage</name>
-      <value>0</value>
-     </assignment>
-     <assignment>
-      <name>embeddedsw.configuration.isPrintableDevice</name>
-      <value>0</value>
-     </assignment>
-     <systemSlaveName>dipsw_pio.s1</systemSlaveName>
-     <addressGroup>0</addressGroup>
-    </slave>
-    <baseAddress>65664</baseAddress>
-    <basePhysicalAddress>65664</basePhysicalAddress>
-    <span>16</span>
-    <isBigEndian>false</isBigEndian>
-    <isInstructionAccessible>false</isInstructionAccessible>
-    <isDataAccessible>false</isDataAccessible>
-    <isTightlyCoupledInstructionAccessible>false</isTightlyCoupledInstructionAccessible>
-    <isTightlyCoupledDataAccessible>false</isTightlyCoupledDataAccessible>
-    <hasIrq>false</hasIrq>
-    <irqNumber>-1</irqNumber>
-    <irqInterruptControllerID>-1</irqInterruptControllerID>
-    <isConnectedInterruptControllerDevice>false</isConnectedInterruptControllerDevice>
-    <interruptControllerID>-1</interruptControllerID>
-   </connectedDevice>
-   <connectedDevice>
-    <moduleName>button_pio</moduleName>
-    <slaveDesc>button_pio</slaveDesc>
-    <slave>
-     <name>s1</name>
-     <version>16.1</version>
-     <assignment>
-      <name>embeddedsw.configuration.isFlash</name>
-      <value>0</value>
-     </assignment>
-     <assignment>
-      <name>embeddedsw.configuration.isMemoryDevice</name>
-      <value>0</value>
-     </assignment>
-     <assignment>
-      <name>embeddedsw.configuration.isNonVolatileStorage</name>
-      <value>0</value>
-     </assignment>
-     <assignment>
-      <name>embeddedsw.configuration.isPrintableDevice</name>
-      <value>0</value>
-     </assignment>
-     <systemSlaveName>button_pio.s1</systemSlaveName>
-     <addressGroup>0</addressGroup>
-    </slave>
-    <baseAddress>65728</baseAddress>
-    <basePhysicalAddress>65728</basePhysicalAddress>
-    <span>16</span>
     <isBigEndian>false</isBigEndian>
     <isInstructionAccessible>false</isInstructionAccessible>
     <isDataAccessible>false</isDataAccessible>
@@ -582,33 +269,33 @@
     <interruptControllerID>-1</interruptControllerID>
    </connectedDevice>
    <connectedDevice>
-    <moduleName>rs232_0</moduleName>
-    <slaveDesc>rs232_0</slaveDesc>
+    <moduleName>I2C_avalon_bridge_0</moduleName>
+    <slaveDesc>I2C_avalon_bridge_0</slaveDesc>
     <slave>
-     <name>avalon_rs232_slave</name>
+     <name>avalon_slave_0</name>
      <version>16.1</version>
      <assignment>
       <name>embeddedsw.configuration.isFlash</name>
-      <value>false</value>
+      <value>0</value>
      </assignment>
      <assignment>
       <name>embeddedsw.configuration.isMemoryDevice</name>
-      <value>false</value>
+      <value>0</value>
      </assignment>
      <assignment>
       <name>embeddedsw.configuration.isNonVolatileStorage</name>
-      <value>false</value>
+      <value>0</value>
      </assignment>
      <assignment>
       <name>embeddedsw.configuration.isPrintableDevice</name>
-      <value>false</value>
+      <value>0</value>
      </assignment>
-     <systemSlaveName>rs232_0.avalon_rs232_slave</systemSlaveName>
+     <systemSlaveName>I2C_avalon_bridge_0.avalon_slave_0</systemSlaveName>
      <addressGroup>0</addressGroup>
     </slave>
-    <baseAddress>65536</baseAddress>
-    <basePhysicalAddress>65536</basePhysicalAddress>
-    <span>8</span>
+    <baseAddress>0</baseAddress>
+    <basePhysicalAddress>0</basePhysicalAddress>
+    <span>16</span>
     <isBigEndian>false</isBigEndian>
     <isInstructionAccessible>false</isInstructionAccessible>
     <isDataAccessible>false</isDataAccessible>
@@ -652,123 +339,6 @@
     <hasIrq>false</hasIrq>
     <irqNumber>-1</irqNumber>
     <irqInterruptControllerID>-1</irqInterruptControllerID>
-    <isConnectedInterruptControllerDevice>false</isConnectedInterruptControllerDevice>
-    <interruptControllerID>-1</interruptControllerID>
-   </connectedDevice>
-   <connectedDevice>
-    <moduleName>led_pio</moduleName>
-    <slaveDesc>led_pio</slaveDesc>
-    <slave>
-     <name>s1</name>
-     <version>16.1</version>
-     <assignment>
-      <name>embeddedsw.configuration.isFlash</name>
-      <value>0</value>
-     </assignment>
-     <assignment>
-      <name>embeddedsw.configuration.isMemoryDevice</name>
-      <value>0</value>
-     </assignment>
-     <assignment>
-      <name>embeddedsw.configuration.isNonVolatileStorage</name>
-      <value>0</value>
-     </assignment>
-     <assignment>
-      <name>embeddedsw.configuration.isPrintableDevice</name>
-      <value>0</value>
-     </assignment>
-     <systemSlaveName>led_pio.s1</systemSlaveName>
-     <addressGroup>0</addressGroup>
-    </slave>
-    <baseAddress>65600</baseAddress>
-    <basePhysicalAddress>65600</basePhysicalAddress>
-    <span>16</span>
-    <isBigEndian>false</isBigEndian>
-    <isInstructionAccessible>false</isInstructionAccessible>
-    <isDataAccessible>false</isDataAccessible>
-    <isTightlyCoupledInstructionAccessible>false</isTightlyCoupledInstructionAccessible>
-    <isTightlyCoupledDataAccessible>false</isTightlyCoupledDataAccessible>
-    <hasIrq>false</hasIrq>
-    <irqNumber>-1</irqNumber>
-    <irqInterruptControllerID>-1</irqInterruptControllerID>
-    <isConnectedInterruptControllerDevice>false</isConnectedInterruptControllerDevice>
-    <interruptControllerID>-1</interruptControllerID>
-   </connectedDevice>
-   <connectedDevice>
-    <moduleName>dipsw_pio</moduleName>
-    <slaveDesc>dipsw_pio</slaveDesc>
-    <slave>
-     <name>s1</name>
-     <version>16.1</version>
-     <assignment>
-      <name>embeddedsw.configuration.isFlash</name>
-      <value>0</value>
-     </assignment>
-     <assignment>
-      <name>embeddedsw.configuration.isMemoryDevice</name>
-      <value>0</value>
-     </assignment>
-     <assignment>
-      <name>embeddedsw.configuration.isNonVolatileStorage</name>
-      <value>0</value>
-     </assignment>
-     <assignment>
-      <name>embeddedsw.configuration.isPrintableDevice</name>
-      <value>0</value>
-     </assignment>
-     <systemSlaveName>dipsw_pio.s1</systemSlaveName>
-     <addressGroup>0</addressGroup>
-    </slave>
-    <baseAddress>65664</baseAddress>
-    <basePhysicalAddress>65664</basePhysicalAddress>
-    <span>16</span>
-    <isBigEndian>false</isBigEndian>
-    <isInstructionAccessible>false</isInstructionAccessible>
-    <isDataAccessible>false</isDataAccessible>
-    <isTightlyCoupledInstructionAccessible>false</isTightlyCoupledInstructionAccessible>
-    <isTightlyCoupledDataAccessible>false</isTightlyCoupledDataAccessible>
-    <hasIrq>true</hasIrq>
-    <irqNumber>0</irqNumber>
-    <irqInterruptControllerID>0</irqInterruptControllerID>
-    <isConnectedInterruptControllerDevice>false</isConnectedInterruptControllerDevice>
-    <interruptControllerID>-1</interruptControllerID>
-   </connectedDevice>
-   <connectedDevice>
-    <moduleName>button_pio</moduleName>
-    <slaveDesc>button_pio</slaveDesc>
-    <slave>
-     <name>s1</name>
-     <version>16.1</version>
-     <assignment>
-      <name>embeddedsw.configuration.isFlash</name>
-      <value>0</value>
-     </assignment>
-     <assignment>
-      <name>embeddedsw.configuration.isMemoryDevice</name>
-      <value>0</value>
-     </assignment>
-     <assignment>
-      <name>embeddedsw.configuration.isNonVolatileStorage</name>
-      <value>0</value>
-     </assignment>
-     <assignment>
-      <name>embeddedsw.configuration.isPrintableDevice</name>
-      <value>0</value>
-     </assignment>
-     <systemSlaveName>button_pio.s1</systemSlaveName>
-     <addressGroup>0</addressGroup>
-    </slave>
-    <baseAddress>65728</baseAddress>
-    <basePhysicalAddress>65728</basePhysicalAddress>
-    <span>16</span>
-    <isBigEndian>false</isBigEndian>
-    <isInstructionAccessible>false</isInstructionAccessible>
-    <isDataAccessible>false</isDataAccessible>
-    <isTightlyCoupledInstructionAccessible>false</isTightlyCoupledInstructionAccessible>
-    <isTightlyCoupledDataAccessible>false</isTightlyCoupledDataAccessible>
-    <hasIrq>true</hasIrq>
-    <irqNumber>1</irqNumber>
-    <irqInterruptControllerID>0</irqInterruptControllerID>
     <isConnectedInterruptControllerDevice>false</isConnectedInterruptControllerDevice>
     <interruptControllerID>-1</interruptControllerID>
    </connectedDevice>
@@ -973,33 +543,33 @@
     <interruptControllerID>-1</interruptControllerID>
    </connectedDevice>
    <connectedDevice>
-    <moduleName>rs232_0</moduleName>
-    <slaveDesc>rs232_0</slaveDesc>
+    <moduleName>I2C_avalon_bridge_0</moduleName>
+    <slaveDesc>I2C_avalon_bridge_0</slaveDesc>
     <slave>
-     <name>avalon_rs232_slave</name>
+     <name>avalon_slave_0</name>
      <version>16.1</version>
      <assignment>
       <name>embeddedsw.configuration.isFlash</name>
-      <value>false</value>
+      <value>0</value>
      </assignment>
      <assignment>
       <name>embeddedsw.configuration.isMemoryDevice</name>
-      <value>false</value>
+      <value>0</value>
      </assignment>
      <assignment>
       <name>embeddedsw.configuration.isNonVolatileStorage</name>
-      <value>false</value>
+      <value>0</value>
      </assignment>
      <assignment>
       <name>embeddedsw.configuration.isPrintableDevice</name>
-      <value>false</value>
+      <value>0</value>
      </assignment>
-     <systemSlaveName>rs232_0.avalon_rs232_slave</systemSlaveName>
+     <systemSlaveName>I2C_avalon_bridge_0.avalon_slave_0</systemSlaveName>
      <addressGroup>0</addressGroup>
     </slave>
-    <baseAddress>65536</baseAddress>
-    <basePhysicalAddress>65536</basePhysicalAddress>
-    <span>8</span>
+    <baseAddress>0</baseAddress>
+    <basePhysicalAddress>0</basePhysicalAddress>
+    <span>16</span>
     <isBigEndian>false</isBigEndian>
     <isInstructionAccessible>false</isInstructionAccessible>
     <isDataAccessible>false</isDataAccessible>
@@ -1035,123 +605,6 @@
     <baseAddress>65536</baseAddress>
     <basePhysicalAddress>65536</basePhysicalAddress>
     <span>8</span>
-    <isBigEndian>false</isBigEndian>
-    <isInstructionAccessible>false</isInstructionAccessible>
-    <isDataAccessible>false</isDataAccessible>
-    <isTightlyCoupledInstructionAccessible>false</isTightlyCoupledInstructionAccessible>
-    <isTightlyCoupledDataAccessible>false</isTightlyCoupledDataAccessible>
-    <hasIrq>false</hasIrq>
-    <irqNumber>-1</irqNumber>
-    <irqInterruptControllerID>-1</irqInterruptControllerID>
-    <isConnectedInterruptControllerDevice>false</isConnectedInterruptControllerDevice>
-    <interruptControllerID>-1</interruptControllerID>
-   </connectedDevice>
-   <connectedDevice>
-    <moduleName>led_pio</moduleName>
-    <slaveDesc>led_pio</slaveDesc>
-    <slave>
-     <name>s1</name>
-     <version>16.1</version>
-     <assignment>
-      <name>embeddedsw.configuration.isFlash</name>
-      <value>0</value>
-     </assignment>
-     <assignment>
-      <name>embeddedsw.configuration.isMemoryDevice</name>
-      <value>0</value>
-     </assignment>
-     <assignment>
-      <name>embeddedsw.configuration.isNonVolatileStorage</name>
-      <value>0</value>
-     </assignment>
-     <assignment>
-      <name>embeddedsw.configuration.isPrintableDevice</name>
-      <value>0</value>
-     </assignment>
-     <systemSlaveName>led_pio.s1</systemSlaveName>
-     <addressGroup>0</addressGroup>
-    </slave>
-    <baseAddress>65600</baseAddress>
-    <basePhysicalAddress>65600</basePhysicalAddress>
-    <span>16</span>
-    <isBigEndian>false</isBigEndian>
-    <isInstructionAccessible>false</isInstructionAccessible>
-    <isDataAccessible>false</isDataAccessible>
-    <isTightlyCoupledInstructionAccessible>false</isTightlyCoupledInstructionAccessible>
-    <isTightlyCoupledDataAccessible>false</isTightlyCoupledDataAccessible>
-    <hasIrq>false</hasIrq>
-    <irqNumber>-1</irqNumber>
-    <irqInterruptControllerID>-1</irqInterruptControllerID>
-    <isConnectedInterruptControllerDevice>false</isConnectedInterruptControllerDevice>
-    <interruptControllerID>-1</interruptControllerID>
-   </connectedDevice>
-   <connectedDevice>
-    <moduleName>dipsw_pio</moduleName>
-    <slaveDesc>dipsw_pio</slaveDesc>
-    <slave>
-     <name>s1</name>
-     <version>16.1</version>
-     <assignment>
-      <name>embeddedsw.configuration.isFlash</name>
-      <value>0</value>
-     </assignment>
-     <assignment>
-      <name>embeddedsw.configuration.isMemoryDevice</name>
-      <value>0</value>
-     </assignment>
-     <assignment>
-      <name>embeddedsw.configuration.isNonVolatileStorage</name>
-      <value>0</value>
-     </assignment>
-     <assignment>
-      <name>embeddedsw.configuration.isPrintableDevice</name>
-      <value>0</value>
-     </assignment>
-     <systemSlaveName>dipsw_pio.s1</systemSlaveName>
-     <addressGroup>0</addressGroup>
-    </slave>
-    <baseAddress>65664</baseAddress>
-    <basePhysicalAddress>65664</basePhysicalAddress>
-    <span>16</span>
-    <isBigEndian>false</isBigEndian>
-    <isInstructionAccessible>false</isInstructionAccessible>
-    <isDataAccessible>false</isDataAccessible>
-    <isTightlyCoupledInstructionAccessible>false</isTightlyCoupledInstructionAccessible>
-    <isTightlyCoupledDataAccessible>false</isTightlyCoupledDataAccessible>
-    <hasIrq>false</hasIrq>
-    <irqNumber>-1</irqNumber>
-    <irqInterruptControllerID>-1</irqInterruptControllerID>
-    <isConnectedInterruptControllerDevice>false</isConnectedInterruptControllerDevice>
-    <interruptControllerID>-1</interruptControllerID>
-   </connectedDevice>
-   <connectedDevice>
-    <moduleName>button_pio</moduleName>
-    <slaveDesc>button_pio</slaveDesc>
-    <slave>
-     <name>s1</name>
-     <version>16.1</version>
-     <assignment>
-      <name>embeddedsw.configuration.isFlash</name>
-      <value>0</value>
-     </assignment>
-     <assignment>
-      <name>embeddedsw.configuration.isMemoryDevice</name>
-      <value>0</value>
-     </assignment>
-     <assignment>
-      <name>embeddedsw.configuration.isNonVolatileStorage</name>
-      <value>0</value>
-     </assignment>
-     <assignment>
-      <name>embeddedsw.configuration.isPrintableDevice</name>
-      <value>0</value>
-     </assignment>
-     <systemSlaveName>button_pio.s1</systemSlaveName>
-     <addressGroup>0</addressGroup>
-    </slave>
-    <baseAddress>65728</baseAddress>
-    <basePhysicalAddress>65728</basePhysicalAddress>
-    <span>16</span>
     <isBigEndian>false</isBigEndian>
     <isInstructionAccessible>false</isInstructionAccessible>
     <isDataAccessible>false</isDataAccessible>
@@ -2425,33 +1878,33 @@
     <interruptControllerID>-1</interruptControllerID>
    </connectedDevice>
    <connectedDevice>
-    <moduleName>rs232_0</moduleName>
-    <slaveDesc>rs232_0</slaveDesc>
+    <moduleName>I2C_avalon_bridge_0</moduleName>
+    <slaveDesc>I2C_avalon_bridge_0</slaveDesc>
     <slave>
-     <name>avalon_rs232_slave</name>
+     <name>avalon_slave_0</name>
      <version>16.1</version>
      <assignment>
       <name>embeddedsw.configuration.isFlash</name>
-      <value>false</value>
+      <value>0</value>
      </assignment>
      <assignment>
       <name>embeddedsw.configuration.isMemoryDevice</name>
-      <value>false</value>
+      <value>0</value>
      </assignment>
      <assignment>
       <name>embeddedsw.configuration.isNonVolatileStorage</name>
-      <value>false</value>
+      <value>0</value>
      </assignment>
      <assignment>
       <name>embeddedsw.configuration.isPrintableDevice</name>
-      <value>false</value>
+      <value>0</value>
      </assignment>
-     <systemSlaveName>rs232_0.avalon_rs232_slave</systemSlaveName>
+     <systemSlaveName>I2C_avalon_bridge_0.avalon_slave_0</systemSlaveName>
      <addressGroup>0</addressGroup>
     </slave>
-    <baseAddress>3221291008</baseAddress>
-    <basePhysicalAddress>3221291008</basePhysicalAddress>
-    <span>8</span>
+    <baseAddress>4280287232</baseAddress>
+    <basePhysicalAddress>4280287232</basePhysicalAddress>
+    <span>16</span>
     <isBigEndian>false</isBigEndian>
     <isInstructionAccessible>false</isInstructionAccessible>
     <isDataAccessible>false</isDataAccessible>
@@ -2487,123 +1940,6 @@
     <baseAddress>4280352768</baseAddress>
     <basePhysicalAddress>4280352768</basePhysicalAddress>
     <span>8</span>
-    <isBigEndian>false</isBigEndian>
-    <isInstructionAccessible>false</isInstructionAccessible>
-    <isDataAccessible>false</isDataAccessible>
-    <isTightlyCoupledInstructionAccessible>false</isTightlyCoupledInstructionAccessible>
-    <isTightlyCoupledDataAccessible>false</isTightlyCoupledDataAccessible>
-    <hasIrq>false</hasIrq>
-    <irqNumber>-1</irqNumber>
-    <irqInterruptControllerID>-1</irqInterruptControllerID>
-    <isConnectedInterruptControllerDevice>false</isConnectedInterruptControllerDevice>
-    <interruptControllerID>-1</interruptControllerID>
-   </connectedDevice>
-   <connectedDevice>
-    <moduleName>led_pio</moduleName>
-    <slaveDesc>led_pio</slaveDesc>
-    <slave>
-     <name>s1</name>
-     <version>16.1</version>
-     <assignment>
-      <name>embeddedsw.configuration.isFlash</name>
-      <value>0</value>
-     </assignment>
-     <assignment>
-      <name>embeddedsw.configuration.isMemoryDevice</name>
-      <value>0</value>
-     </assignment>
-     <assignment>
-      <name>embeddedsw.configuration.isNonVolatileStorage</name>
-      <value>0</value>
-     </assignment>
-     <assignment>
-      <name>embeddedsw.configuration.isPrintableDevice</name>
-      <value>0</value>
-     </assignment>
-     <systemSlaveName>led_pio.s1</systemSlaveName>
-     <addressGroup>0</addressGroup>
-    </slave>
-    <baseAddress>4280352832</baseAddress>
-    <basePhysicalAddress>4280352832</basePhysicalAddress>
-    <span>16</span>
-    <isBigEndian>false</isBigEndian>
-    <isInstructionAccessible>false</isInstructionAccessible>
-    <isDataAccessible>false</isDataAccessible>
-    <isTightlyCoupledInstructionAccessible>false</isTightlyCoupledInstructionAccessible>
-    <isTightlyCoupledDataAccessible>false</isTightlyCoupledDataAccessible>
-    <hasIrq>false</hasIrq>
-    <irqNumber>-1</irqNumber>
-    <irqInterruptControllerID>-1</irqInterruptControllerID>
-    <isConnectedInterruptControllerDevice>false</isConnectedInterruptControllerDevice>
-    <interruptControllerID>-1</interruptControllerID>
-   </connectedDevice>
-   <connectedDevice>
-    <moduleName>dipsw_pio</moduleName>
-    <slaveDesc>dipsw_pio</slaveDesc>
-    <slave>
-     <name>s1</name>
-     <version>16.1</version>
-     <assignment>
-      <name>embeddedsw.configuration.isFlash</name>
-      <value>0</value>
-     </assignment>
-     <assignment>
-      <name>embeddedsw.configuration.isMemoryDevice</name>
-      <value>0</value>
-     </assignment>
-     <assignment>
-      <name>embeddedsw.configuration.isNonVolatileStorage</name>
-      <value>0</value>
-     </assignment>
-     <assignment>
-      <name>embeddedsw.configuration.isPrintableDevice</name>
-      <value>0</value>
-     </assignment>
-     <systemSlaveName>dipsw_pio.s1</systemSlaveName>
-     <addressGroup>0</addressGroup>
-    </slave>
-    <baseAddress>4280352896</baseAddress>
-    <basePhysicalAddress>4280352896</basePhysicalAddress>
-    <span>16</span>
-    <isBigEndian>false</isBigEndian>
-    <isInstructionAccessible>false</isInstructionAccessible>
-    <isDataAccessible>false</isDataAccessible>
-    <isTightlyCoupledInstructionAccessible>false</isTightlyCoupledInstructionAccessible>
-    <isTightlyCoupledDataAccessible>false</isTightlyCoupledDataAccessible>
-    <hasIrq>false</hasIrq>
-    <irqNumber>-1</irqNumber>
-    <irqInterruptControllerID>-1</irqInterruptControllerID>
-    <isConnectedInterruptControllerDevice>false</isConnectedInterruptControllerDevice>
-    <interruptControllerID>-1</interruptControllerID>
-   </connectedDevice>
-   <connectedDevice>
-    <moduleName>button_pio</moduleName>
-    <slaveDesc>button_pio</slaveDesc>
-    <slave>
-     <name>s1</name>
-     <version>16.1</version>
-     <assignment>
-      <name>embeddedsw.configuration.isFlash</name>
-      <value>0</value>
-     </assignment>
-     <assignment>
-      <name>embeddedsw.configuration.isMemoryDevice</name>
-      <value>0</value>
-     </assignment>
-     <assignment>
-      <name>embeddedsw.configuration.isNonVolatileStorage</name>
-      <value>0</value>
-     </assignment>
-     <assignment>
-      <name>embeddedsw.configuration.isPrintableDevice</name>
-      <value>0</value>
-     </assignment>
-     <systemSlaveName>button_pio.s1</systemSlaveName>
-     <addressGroup>0</addressGroup>
-    </slave>
-    <baseAddress>4280352960</baseAddress>
-    <basePhysicalAddress>4280352960</basePhysicalAddress>
-    <span>16</span>
     <isBigEndian>false</isBigEndian>
     <isInstructionAccessible>false</isInstructionAccessible>
     <isDataAccessible>false</isDataAccessible>
@@ -3844,33 +3180,33 @@
     <interruptControllerID>-1</interruptControllerID>
    </connectedDevice>
    <connectedDevice>
-    <moduleName>rs232_0</moduleName>
-    <slaveDesc>rs232_0</slaveDesc>
+    <moduleName>I2C_avalon_bridge_0</moduleName>
+    <slaveDesc>I2C_avalon_bridge_0</slaveDesc>
     <slave>
-     <name>avalon_rs232_slave</name>
+     <name>avalon_slave_0</name>
      <version>16.1</version>
      <assignment>
       <name>embeddedsw.configuration.isFlash</name>
-      <value>false</value>
+      <value>0</value>
      </assignment>
      <assignment>
       <name>embeddedsw.configuration.isMemoryDevice</name>
-      <value>false</value>
+      <value>0</value>
      </assignment>
      <assignment>
       <name>embeddedsw.configuration.isNonVolatileStorage</name>
-      <value>false</value>
+      <value>0</value>
      </assignment>
      <assignment>
       <name>embeddedsw.configuration.isPrintableDevice</name>
-      <value>false</value>
+      <value>0</value>
      </assignment>
-     <systemSlaveName>rs232_0.avalon_rs232_slave</systemSlaveName>
+     <systemSlaveName>I2C_avalon_bridge_0.avalon_slave_0</systemSlaveName>
      <addressGroup>0</addressGroup>
     </slave>
-    <baseAddress>3221291008</baseAddress>
-    <basePhysicalAddress>3221291008</basePhysicalAddress>
-    <span>8</span>
+    <baseAddress>4280287232</baseAddress>
+    <basePhysicalAddress>4280287232</basePhysicalAddress>
+    <span>16</span>
     <isBigEndian>false</isBigEndian>
     <isInstructionAccessible>false</isInstructionAccessible>
     <isDataAccessible>false</isDataAccessible>
@@ -3906,123 +3242,6 @@
     <baseAddress>4280352768</baseAddress>
     <basePhysicalAddress>4280352768</basePhysicalAddress>
     <span>8</span>
-    <isBigEndian>false</isBigEndian>
-    <isInstructionAccessible>false</isInstructionAccessible>
-    <isDataAccessible>false</isDataAccessible>
-    <isTightlyCoupledInstructionAccessible>false</isTightlyCoupledInstructionAccessible>
-    <isTightlyCoupledDataAccessible>false</isTightlyCoupledDataAccessible>
-    <hasIrq>false</hasIrq>
-    <irqNumber>-1</irqNumber>
-    <irqInterruptControllerID>-1</irqInterruptControllerID>
-    <isConnectedInterruptControllerDevice>false</isConnectedInterruptControllerDevice>
-    <interruptControllerID>-1</interruptControllerID>
-   </connectedDevice>
-   <connectedDevice>
-    <moduleName>led_pio</moduleName>
-    <slaveDesc>led_pio</slaveDesc>
-    <slave>
-     <name>s1</name>
-     <version>16.1</version>
-     <assignment>
-      <name>embeddedsw.configuration.isFlash</name>
-      <value>0</value>
-     </assignment>
-     <assignment>
-      <name>embeddedsw.configuration.isMemoryDevice</name>
-      <value>0</value>
-     </assignment>
-     <assignment>
-      <name>embeddedsw.configuration.isNonVolatileStorage</name>
-      <value>0</value>
-     </assignment>
-     <assignment>
-      <name>embeddedsw.configuration.isPrintableDevice</name>
-      <value>0</value>
-     </assignment>
-     <systemSlaveName>led_pio.s1</systemSlaveName>
-     <addressGroup>0</addressGroup>
-    </slave>
-    <baseAddress>4280352832</baseAddress>
-    <basePhysicalAddress>4280352832</basePhysicalAddress>
-    <span>16</span>
-    <isBigEndian>false</isBigEndian>
-    <isInstructionAccessible>false</isInstructionAccessible>
-    <isDataAccessible>false</isDataAccessible>
-    <isTightlyCoupledInstructionAccessible>false</isTightlyCoupledInstructionAccessible>
-    <isTightlyCoupledDataAccessible>false</isTightlyCoupledDataAccessible>
-    <hasIrq>false</hasIrq>
-    <irqNumber>-1</irqNumber>
-    <irqInterruptControllerID>-1</irqInterruptControllerID>
-    <isConnectedInterruptControllerDevice>false</isConnectedInterruptControllerDevice>
-    <interruptControllerID>-1</interruptControllerID>
-   </connectedDevice>
-   <connectedDevice>
-    <moduleName>dipsw_pio</moduleName>
-    <slaveDesc>dipsw_pio</slaveDesc>
-    <slave>
-     <name>s1</name>
-     <version>16.1</version>
-     <assignment>
-      <name>embeddedsw.configuration.isFlash</name>
-      <value>0</value>
-     </assignment>
-     <assignment>
-      <name>embeddedsw.configuration.isMemoryDevice</name>
-      <value>0</value>
-     </assignment>
-     <assignment>
-      <name>embeddedsw.configuration.isNonVolatileStorage</name>
-      <value>0</value>
-     </assignment>
-     <assignment>
-      <name>embeddedsw.configuration.isPrintableDevice</name>
-      <value>0</value>
-     </assignment>
-     <systemSlaveName>dipsw_pio.s1</systemSlaveName>
-     <addressGroup>0</addressGroup>
-    </slave>
-    <baseAddress>4280352896</baseAddress>
-    <basePhysicalAddress>4280352896</basePhysicalAddress>
-    <span>16</span>
-    <isBigEndian>false</isBigEndian>
-    <isInstructionAccessible>false</isInstructionAccessible>
-    <isDataAccessible>false</isDataAccessible>
-    <isTightlyCoupledInstructionAccessible>false</isTightlyCoupledInstructionAccessible>
-    <isTightlyCoupledDataAccessible>false</isTightlyCoupledDataAccessible>
-    <hasIrq>false</hasIrq>
-    <irqNumber>-1</irqNumber>
-    <irqInterruptControllerID>-1</irqInterruptControllerID>
-    <isConnectedInterruptControllerDevice>false</isConnectedInterruptControllerDevice>
-    <interruptControllerID>-1</interruptControllerID>
-   </connectedDevice>
-   <connectedDevice>
-    <moduleName>button_pio</moduleName>
-    <slaveDesc>button_pio</slaveDesc>
-    <slave>
-     <name>s1</name>
-     <version>16.1</version>
-     <assignment>
-      <name>embeddedsw.configuration.isFlash</name>
-      <value>0</value>
-     </assignment>
-     <assignment>
-      <name>embeddedsw.configuration.isMemoryDevice</name>
-      <value>0</value>
-     </assignment>
-     <assignment>
-      <name>embeddedsw.configuration.isNonVolatileStorage</name>
-      <value>0</value>
-     </assignment>
-     <assignment>
-      <name>embeddedsw.configuration.isPrintableDevice</name>
-      <value>0</value>
-     </assignment>
-     <systemSlaveName>button_pio.s1</systemSlaveName>
-     <addressGroup>0</addressGroup>
-    </slave>
-    <baseAddress>4280352960</baseAddress>
-    <basePhysicalAddress>4280352960</basePhysicalAddress>
-    <span>16</span>
     <isBigEndian>false</isBigEndian>
     <isInstructionAccessible>false</isInstructionAccessible>
     <isDataAccessible>false</isDataAccessible>
@@ -7955,94 +7174,6 @@
   <path>jtag_uart</path>
  </module>
  <module>
-  <name>led_pio</name>
-  <version>16.1</version>
-  <assignment>
-   <name>embeddedsw.CMacro.BIT_CLEARING_EDGE_REGISTER</name>
-   <value>0</value>
-  </assignment>
-  <assignment>
-   <name>embeddedsw.CMacro.BIT_MODIFYING_OUTPUT_REGISTER</name>
-   <value>0</value>
-  </assignment>
-  <assignment>
-   <name>embeddedsw.CMacro.CAPTURE</name>
-   <value>0</value>
-  </assignment>
-  <assignment>
-   <name>embeddedsw.CMacro.DATA_WIDTH</name>
-   <value>8</value>
-  </assignment>
-  <assignment>
-   <name>embeddedsw.CMacro.DO_TEST_BENCH_WIRING</name>
-   <value>0</value>
-  </assignment>
-  <assignment>
-   <name>embeddedsw.CMacro.DRIVEN_SIM_VALUE</name>
-   <value>0</value>
-  </assignment>
-  <assignment>
-   <name>embeddedsw.CMacro.EDGE_TYPE</name>
-   <value>NONE</value>
-  </assignment>
-  <assignment>
-   <name>embeddedsw.CMacro.FREQ</name>
-   <value>50000000</value>
-  </assignment>
-  <assignment>
-   <name>embeddedsw.CMacro.HAS_IN</name>
-   <value>0</value>
-  </assignment>
-  <assignment>
-   <name>embeddedsw.CMacro.HAS_OUT</name>
-   <value>1</value>
-  </assignment>
-  <assignment>
-   <name>embeddedsw.CMacro.HAS_TRI</name>
-   <value>0</value>
-  </assignment>
-  <assignment>
-   <name>embeddedsw.CMacro.IRQ_TYPE</name>
-   <value>NONE</value>
-  </assignment>
-  <assignment>
-   <name>embeddedsw.CMacro.RESET_VALUE</name>
-   <value>0</value>
-  </assignment>
-  <assignment>
-   <name>embeddedsw.dts.compatible</name>
-   <value>altr,pio-1.0</value>
-  </assignment>
-  <assignment>
-   <name>embeddedsw.dts.group</name>
-   <value>gpio</value>
-  </assignment>
-  <assignment>
-   <name>embeddedsw.dts.name</name>
-   <value>pio</value>
-  </assignment>
-  <assignment>
-   <name>embeddedsw.dts.params.altr,gpio-bank-width</name>
-   <value>8</value>
-  </assignment>
-  <assignment>
-   <name>embeddedsw.dts.params.resetvalue</name>
-   <value>0</value>
-  </assignment>
-  <assignment>
-   <name>embeddedsw.dts.vendor</name>
-   <value>altr</value>
-  </assignment>
-  <className>altera_avalon_pio</className>
-  <clockConnection>
-   <moduleName>led_pio</moduleName>
-   <localSlaveName>clk</localSlaveName>
-   <systemConnectionName>led_pio.clk</systemConnectionName>
-   <frequency>50000000</frequency>
-  </clockConnection>
-  <path>led_pio</path>
- </module>
- <module>
   <name>onchip_memory2_0</name>
   <version>16.1</version>
   <assignment>
@@ -8151,18 +7282,6 @@
   <path>onchip_memory2_0</path>
  </module>
  <module>
-  <name>rs232_0</name>
-  <version>16.1</version>
-  <className>altera_up_avalon_rs232</className>
-  <clockConnection>
-   <moduleName>rs232_0</moduleName>
-   <localSlaveName>clk</localSlaveName>
-   <systemConnectionName>rs232_0.clk</systemConnectionName>
-   <frequency>50000000</frequency>
-  </clockConnection>
-  <path>rs232_0</path>
- </module>
- <module>
   <name>sysid_qsys</name>
   <version>16.1</version>
   <assignment>
@@ -8171,7 +7290,7 @@
   </assignment>
   <assignment>
    <name>embeddedsw.CMacro.TIMESTAMP</name>
-   <value>1494426319</value>
+   <value>1495010605</value>
   </assignment>
   <assignment>
    <name>embeddedsw.dts.compatible</name>
@@ -8191,7 +7310,7 @@
   </assignment>
   <assignment>
    <name>embeddedsw.dts.params.timestamp</name>
-   <value>1494426319</value>
+   <value>1495010605</value>
   </assignment>
   <assignment>
    <name>embeddedsw.dts.vendor</name>

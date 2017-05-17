@@ -34,8 +34,8 @@
 `define ENABLE_HPS
 //`define ENABLE_CLK
 
-module ghrd(
-
+module ghrd( 
+ 
       ///////// ADC /////////
       output             ADC_CONVST,
       output             ADC_SCK,
@@ -137,11 +137,21 @@ module ghrd(
   wire [27:0] stm_hw_events;
   wire 		  fpga_clk_50;
 // connection of internal logics
-  assign LED[7:1] = fpga_led_internal;
   assign fpga_clk_50=FPGA_CLK1_50;
   assign stm_hw_events    = {{15{1'b0}}, SW, fpga_led_internal, fpga_debounced_buttons};
-
-
+  
+//  wire scl_padoen_oe;
+//  wire sda_padoen_oe;
+//  wire scl_pad_o;
+//  wire sda_pad_o;
+//  wire scl_pad_i;
+//  wire sda_pad_i;
+  
+//	assign scl = scl_padoen_oe ? 1'bz : scl_pad_o;
+//	assign sda = sda_padoen_oe ? 1'bz : sda_pad_o;	
+//	assign scl_pad_i = scl;
+//	assign sda_pad_i = sda;
+	
 //=======================================================
 //  Structural coding
 //=======================================================
@@ -151,12 +161,8 @@ module ghrd(
 		//Clock&Reset
 	  .clk_clk                               (FPGA_CLK1_50 ),                               //                            clk.clk
 	  .reset_reset_n                         (hps_fpga_reset_n ),                         //                          reset.reset_n
-	  .i2c_scl_pad_i								  (FPGA_CLK1_50),
-	  .i2c_scl_pad_o,                         //                               .scl_pad_o
-	  .i2c_scl_padoen_o,                      //                               .scl_padoen_o
-	  .i2c_sda_pad_i,                         //                               .sda_pad_i
-	  .i2c_sda_pad_o,                         //                               .sda_pad_o
-	  .i2c_sda_padoen_o,
+	  .i2c_avalon_bridge_scl					  (GPIO_1[24]),
+	  .i2c_avalon_bridge_sda					  (GPIO_1[25]),
 	  //HPS ddr3
 	  .memory_mem_a                          ( HPS_DDR3_ADDR),                       //                memory.mem_a
 	  .memory_mem_ba                         ( HPS_DDR3_BA),                         //                .mem_ba
@@ -231,15 +237,11 @@ module ghrd(
 	  .hps_0_hps_io_hps_io_gpio_inst_GPIO54  ( HPS_KEY   ),  //                               .hps_io_gpio_inst_GPIO54
 	  .hps_0_hps_io_hps_io_gpio_inst_GPIO61  ( HPS_GSENSOR_INT ),  //                               .hps_io_gpio_inst_GPIO61
 		//FPGA Partion
-	  .led_pio_external_connection_export    ( fpga_led_internal 	),    //    led_pio_external_connection.export
-	  .dipsw_pio_external_connection_export  ( SW	),  //  dipsw_pio_external_connection.export
-	  .button_pio_external_connection_export ( fpga_debounced_buttons	), // button_pio_external_connection.export
 	  .hps_0_h2f_reset_reset_n               ( hps_fpga_reset_n ),                //                hps_0_h2f_reset.reset_n
 	  .hps_0_f2h_cold_reset_req_reset_n      (~hps_cold_reset ),      //       hps_0_f2h_cold_reset_req.reset_n
      .hps_0_f2h_debug_reset_req_reset_n     (~hps_debug_reset ),     //      hps_0_f2h_debug_reset_req.reset_n
      .hps_0_f2h_stm_hw_events_stm_hwevents  (stm_hw_events ),  //        hps_0_f2h_stm_hw_events.stm_hwevents
-     .hps_0_f2h_warm_reset_req_reset_n      (~hps_warm_reset ),      //       hps_0_f2h_warm_reset_req.reset_n
-
+     .hps_0_f2h_warm_reset_req_reset_n      (~hps_warm_reset )      //       hps_0_f2h_warm_reset_req.reset_n
  );
 
 // Debounce logic to clean out glitches within 1ms
