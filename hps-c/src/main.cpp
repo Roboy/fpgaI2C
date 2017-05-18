@@ -60,13 +60,7 @@ int main(int argc, char *argv[]) {
 
 	I2C* i2c = new I2C(h2p_lw_i2c_addr);
 
-	i2c->i2cWrite(0x01,0,1);
-	i2c->i2cWrite(0x01,0,2);
-	i2c->i2cWrite(0x01,0,3);
-	i2c->i2cWrite(0x01,0,4);
-	i2c->i2cWrite(0x01,0,5);
-	i2c->i2cWrite(0x01,0,6);
-	i2c->i2cWrite(0x01,0,7);
+	i2c->readSensor(0x00);
 //	i2c->i2cRead(0x01,2);
 //	i2c->readSensor(0x00);
 

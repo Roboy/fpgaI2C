@@ -54,7 +54,7 @@ always @(posedge clock, posedge reset) begin: I2C_CONTROL_LOGIC
 		if(write && ~waitrequest) begin
 			case(address)
 				0: addr <= writedata; 
-				1: data_wr <= writedata; 
+				1: data_write <= writedata; 
 				2: rw <= writedata; 
 				3: ena <= writedata;
 				4: number_of_bytes <= writedata;
