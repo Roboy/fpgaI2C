@@ -29,10 +29,15 @@ reg rw;
 reg busy;
 reg ack_error;
 reg ena;
+reg [2:0] number_of_bytes;
+wire [2:0] byte_counter;
+reg busy_prev;
+reg [31:0] data_read;
+reg [31:0] data_write;
 
 assign readdata = 
 	((address == 0))? addr :
-	((address == 1))? data_rd :
+	((address == 1))? data_read :
 	((address == 2))? rw :
 	((address == 3))? ena :
 	((address == 4))? busy :
@@ -40,7 +45,9 @@ assign readdata =
 	32'hDEAD_BEEF;
 	
 always @(posedge clock, posedge reset) begin: I2C_CONTROL_LOGIC
-	if (reset == 1) begin
+	if (reset == 1) begin 
+		data_read <= 0;
+		data_write <= 0;
 		ena <= 0;
 	end else begin
 		// if we are writing via avalon bus and waitrequest is deasserted, write the respective register
@@ -50,15 +57,31 @@ always @(posedge clock, posedge reset) begin: I2C_CONTROL_LOGIC
 				1: data_wr <= writedata; 
 				2: rw <= writedata; 
 				3: ena <= writedata;
+				4: number_of_bytes <= writedata;
 			endcase 
 		end
-		if (ena !== 0 && busy === 1) 
-			ena <= 0;		
+		if(byte_counter>=number_of_bytes) 
+			ena <= 0;
+		if( busy==0 ) begin
+			if (byte_counter == 0) begin
+				data_read[7:0] <= data_rd;
+				data_wr <= data_write[7:0];
+			end else if(byte_counter == 1) begin
+				data_read[15:0] <= data_rd;
+				data_wr <= data_write[15:0];
+			end else if(byte_counter == 2) begin
+				data_read[23:16] <= data_rd;
+				data_wr <= data_write[23:16];
+			end else if(byte_counter == 3) begin
+				data_read[31:24] <= data_rd;
+				data_wr <= data_write[31:24];
+			end
+		end
 	end 
 end
 
 // if i2c node is busy we have to wait
-assign waitrequest = busy||ena;
+assign waitrequest = busy||ena ;
 
 i2c_master i2c(
 	.clk(clock),
@@ -71,7 +94,8 @@ i2c_master i2c(
 	.data_rd(data_rd),
 	.ack_error(ack_error),
 	.sda(sda),
-	.scl(scl)
+	.scl(scl),
+	.byte_counter(byte_counter)
 );
 
 endmodule

@@ -52,6 +52,7 @@ public:
 	const uint8_t reg_data = 1;  // note that internally there are 2 registers for data: data_rd and data_wr
 	const uint8_t reg_rw = 2;
 	const uint8_t reg_ena = 3;
+	const uint8_t reg_number_of_bytes = 4;
 
 	// registers: only read
 	const uint8_t reg_busy = 4;
@@ -61,9 +62,9 @@ public:
 	const uint8_t opt_write = 0;
 	const uint8_t opt_read = 1;
 
-	void i2cWrite(uint8_t i2cAddr, uint8_t data);
-	uint8_t i2cRead(uint8_t i2cAddr, uint8_t reg);
-	void readSensor(uint8_t i2cAddr);
+	void i2cWrite(uint8_t i2cAddr, uint32_t data, uint8_t number_of_bytes);
+	uint32_t i2cRead(uint8_t i2cAddr, uint8_t number_of_bytes);
+	uint32_t readSensor(uint8_t i2cAddr);
 
 };
 

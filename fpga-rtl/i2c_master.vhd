@@ -48,7 +48,8 @@ ENTITY i2c_master IS
     data_rd   : OUT    STD_LOGIC_VECTOR(7 DOWNTO 0); --data read from slave
     ack_error : BUFFER STD_LOGIC;                    --flag if improper acknowledge from slave
     sda       : INOUT  STD_LOGIC;                    --serial data output of i2c bus
-    scl       : INOUT  STD_LOGIC);                   --serial clock output of i2c bus
+    scl       : INOUT  STD_LOGIC;                   --serial clock output of i2c bus
+	 byte_counter : OUT INTEGER RANGE 0 TO 7); 		  --how many bytes are sent or received
 END i2c_master;
 
 ARCHITECTURE logic OF i2c_master IS
@@ -66,6 +67,7 @@ ARCHITECTURE logic OF i2c_master IS
   SIGNAL data_rx       : STD_LOGIC_VECTOR(7 DOWNTO 0);   --data received from slave
   SIGNAL bit_cnt       : INTEGER RANGE 0 TO 7 := 7;      --tracks bit number in transaction
   SIGNAL stretch       : STD_LOGIC := '0';               --identifies if slave is stretching scl
+  SIGNAL counter       : INTEGER RANGE 0 TO 7 := 0;      --tracks bit number in transaction
 BEGIN
 
   --generate the timing for the bus clock (scl_clk) and the data clock (data_clk)
@@ -115,6 +117,7 @@ BEGIN
       ack_error <= '0';                    --clear acknowledge error flag
       bit_cnt <= 7;                        --restarts data bit counter
       data_rd <= "00000000";               --clear data read port
+		counter <= 0;
     ELSIF(clk'EVENT AND clk = '1') THEN
       IF(data_clk = '1' AND data_clk_prev = '0') THEN  --data clock rising edge
         CASE state IS
@@ -128,6 +131,7 @@ BEGIN
               busy <= '0';                   --unflag busy
               state <= ready;                --remain idle
             END IF;
+				counter <= 0; 							--reset byte counter
           WHEN start =>                      --start bit of transaction
             busy <= '1';                     --resume busy if continuous mode
             sda_int <= addr_rw(bit_cnt);     --set first address bit to bus
@@ -156,6 +160,7 @@ BEGIN
               sda_int <= '1';                --release sda for slave acknowledge
               bit_cnt <= 7;                  --reset bit counter for "byte" states
               state <= slv_ack2;             --go to slave acknowledge (write)
+				  counter <= counter+1; 			--increase byte counter
             ELSE                             --next clock cycle of write state
               bit_cnt <= bit_cnt - 1;        --keep track of transaction bits
               sda_int <= data_tx(bit_cnt-1); --write next bit to bus
@@ -172,6 +177,7 @@ BEGIN
               bit_cnt <= 7;                  --reset bit counter for "byte" states
               data_rd <= data_rx;            --output received data
               state <= mstr_ack;             --go to master acknowledge
+				  counter <= counter+1; 			--increase byte counter
             ELSE                             --next clock cycle of read state
               bit_cnt <= bit_cnt - 1;        --keep track of transaction bits
               state <= rd;                   --continue reading
@@ -243,5 +249,7 @@ BEGIN
   --set scl and sda outputs
   scl <= '0' WHEN (scl_ena = '1' AND scl_clk = '0') ELSE 'Z';
   sda <= '0' WHEN sda_ena_n = '0' ELSE 'Z';
+  
+  byte_counter <= counter;
   
 END logic;
