@@ -161,8 +161,8 @@ module ghrd(
 		//Clock&Reset
 	  .clk_clk                               (FPGA_CLK1_50 ),                               //                            clk.clk
 	  .reset_reset_n                         (hps_fpga_reset_n ),                         //                          reset.reset_n
-	  .i2c_avalon_bridge_scl					  (GPIO_1[24]),
-	  .i2c_avalon_bridge_sda					  (GPIO_1[25]),
+	  .i2c_avalon_bridge_scl					  (GPIO_1[0]),
+	  .i2c_avalon_bridge_sda					  (GPIO_1[1]),
 	  //HPS ddr3
 	  .memory_mem_a                          ( HPS_DDR3_ADDR),                       //                memory.mem_a
 	  .memory_mem_ba                         ( HPS_DDR3_BA),                         //                .mem_ba

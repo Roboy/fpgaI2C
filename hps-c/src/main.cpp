@@ -60,11 +60,15 @@ int main(int argc, char *argv[]) {
 
 	I2C* i2c = new I2C(h2p_lw_i2c_addr);
 
+	i2c->i2cWrite(0x01,0);
+	i2c->readSensor(0x00);
+
+
 	// write
-	for (int i = 0; i < 10; i++) {
-		i2c->i2cWrite(i, i);
-		printf("wait\n");
-	}
+//	for (int i = 0; i < 10; i++) {
+//		i2c->i2cWrite(i, i);
+//		printf("wait\n");
+//	}
 
 	// read
 	//char read = i2c->i2cRead(3);

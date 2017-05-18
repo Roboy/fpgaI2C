@@ -8,11 +8,11 @@
 					"strict" : false
 				},
 				{
-					"name" : "GPIO_1[24]",
+					"name" : "GPIO_1[0]",
 					"strict" : false
 				},
 				{
-					"name" : "GPIO_1[25]",
+					"name" : "GPIO_1[1]",
 					"strict" : false
 				},
 				{

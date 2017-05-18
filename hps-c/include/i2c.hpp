@@ -48,21 +48,22 @@ public:
 	I2C(void * baseAddr);
 
 	// registers: read or write
-	const char reg_addr = 0;
-	const char reg_data = 1;  // note that internally there are 2 registers for data: data_rd and data_wr
-	const char reg_rw = 2;
-	const char reg_ena = 3;
+	const uint8_t reg_addr = 0;
+	const uint8_t reg_data = 1;  // note that internally there are 2 registers for data: data_rd and data_wr
+	const uint8_t reg_rw = 2;
+	const uint8_t reg_ena = 3;
 
 	// registers: only read
-	const char reg_busy = 4;
-	const char reg_ack_error = 5;
+	const uint8_t reg_busy = 4;
+	const uint8_t reg_ack_error = 5;
 
 	// operations
-	const char opt_write = 0;
-	const char opt_read = 1;
+	const uint8_t opt_write = 0;
+	const uint8_t opt_read = 1;
 
-	void i2cWrite(char i2cAddr, char data);
-	char i2cRead(char i2cAddr);
+	void i2cWrite(uint8_t i2cAddr, uint8_t data);
+	uint8_t i2cRead(uint8_t i2cAddr, uint8_t reg);
+	void readSensor(uint8_t i2cAddr);
 
 };
 

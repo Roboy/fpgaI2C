@@ -53,6 +53,8 @@
 		.hps_0_hps_io_hps_io_gpio_inst_GPIO53  (<connected-to-hps_0_hps_io_hps_io_gpio_inst_GPIO53>),  //                          .hps_io_gpio_inst_GPIO53
 		.hps_0_hps_io_hps_io_gpio_inst_GPIO54  (<connected-to-hps_0_hps_io_hps_io_gpio_inst_GPIO54>),  //                          .hps_io_gpio_inst_GPIO54
 		.hps_0_hps_io_hps_io_gpio_inst_GPIO61  (<connected-to-hps_0_hps_io_hps_io_gpio_inst_GPIO61>),  //                          .hps_io_gpio_inst_GPIO61
+		.i2c_avalon_bridge_scl                 (<connected-to-i2c_avalon_bridge_scl>),                 //         i2c_avalon_bridge.scl
+		.i2c_avalon_bridge_sda                 (<connected-to-i2c_avalon_bridge_sda>),                 //                          .sda
 		.memory_mem_a                          (<connected-to-memory_mem_a>),                          //                    memory.mem_a
 		.memory_mem_ba                         (<connected-to-memory_mem_ba>),                         //                          .mem_ba
 		.memory_mem_ck                         (<connected-to-memory_mem_ck>),                         //                          .mem_ck
@@ -69,8 +71,6 @@
 		.memory_mem_odt                        (<connected-to-memory_mem_odt>),                        //                          .mem_odt
 		.memory_mem_dm                         (<connected-to-memory_mem_dm>),                         //                          .mem_dm
 		.memory_oct_rzqin                      (<connected-to-memory_oct_rzqin>),                      //                          .oct_rzqin
-		.reset_reset_n                         (<connected-to-reset_reset_n>),                         //                     reset.reset_n
-		.i2c_avalon_bridge_scl                 (<connected-to-i2c_avalon_bridge_scl>),                 //         i2c_avalon_bridge.scl
-		.i2c_avalon_bridge_sda                 (<connected-to-i2c_avalon_bridge_sda>)                  //                          .sda
+		.reset_reset_n                         (<connected-to-reset_reset_n>)                          //                     reset.reset_n
 	);
 

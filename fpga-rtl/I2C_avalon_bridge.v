@@ -58,7 +58,7 @@ always @(posedge clock, posedge reset) begin: I2C_CONTROL_LOGIC
 end
 
 // if i2c node is busy we have to wait
-assign waitrequest = busy;
+assign waitrequest = busy||ena;
 
 i2c_master i2c(
 	.clk(clock),
