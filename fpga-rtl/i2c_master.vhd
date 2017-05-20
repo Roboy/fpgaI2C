@@ -43,9 +43,9 @@ ENTITY i2c_master IS
     ena       : IN     STD_LOGIC;                    --latch in command
     addr      : IN     STD_LOGIC_VECTOR(6 DOWNTO 0); --address of target slave
     rw        : IN     STD_LOGIC;                    --'0' is write, '1' is read
-    data_wr   : IN     STD_LOGIC_VECTOR(7 DOWNTO 0); --data to write to slave
+    data_wr   : IN     STD_LOGIC_VECTOR(31 DOWNTO 0); --data to write to slave
     busy      : OUT    STD_LOGIC;                    --indicates transaction in progress
-    data_rd   : OUT    STD_LOGIC_VECTOR(7 DOWNTO 0); --data read from slave
+    data_rd   : OUT    STD_LOGIC_VECTOR(31 DOWNTO 0); --data read from slave
     ack_error : BUFFER STD_LOGIC;                    --flag if improper acknowledge from slave
     sda       : INOUT  STD_LOGIC;                    --serial data output of i2c bus
     scl       : INOUT  STD_LOGIC;                   --serial clock output of i2c bus
@@ -116,7 +116,6 @@ BEGIN
       sda_int <= '1';                      --sets sda high impedance
       ack_error <= '0';                    --clear acknowledge error flag
       bit_cnt <= 7;                        --restarts data bit counter
-      data_rd <= "00000000";               --clear data read port
 		counter <= 0;
     ELSIF(clk'EVENT AND clk = '1') THEN
       IF(data_clk = '1' AND data_clk_prev = '0') THEN  --data clock rising edge
@@ -124,8 +123,12 @@ BEGIN
           WHEN ready =>                      --idle state
             IF(ena = '1') THEN               --transaction requested
               busy <= '1';                   --flag busy
-              addr_rw <= addr & rw;          --collect requested slave address and command
-              data_tx <= data_wr;            --collect requested data to write
+					IF(rw = '1') THEN					--if we want to read
+						addr_rw <= addr & (not rw);       --write register first
+					ELSE
+						addr_rw <= addr & rw;		--collect requested slave address and command
+					END IF;
+              data_tx <= data_wr(7 downto 0) ;            --collect requested data to write
               state <= start;                --go to start bit
             ELSE                             --remain idle
               busy <= '0';                   --unflag busy
@@ -175,7 +178,13 @@ BEGIN
                 sda_int <= '1';              --send a no-acknowledge (before stop or repeated start)
               END IF;
               bit_cnt <= 7;                  --reset bit counter for "byte" states
-              data_rd <= data_rx;            --output received data
+				  case counter is 					--output received data
+						when 1 => data_rd(7 downto 0) <= data_rx;            
+						when 2 => data_rd(15 downto 8) <= data_rx;
+						when 3 => data_rd(23 downto 16) <= data_rx;
+						when 4 => data_rd(31 downto 24) <= data_rx;
+						when others => data_rd(31 downto 24) <= data_rx;
+				  end case;
               state <= mstr_ack;             --go to master acknowledge
 				  counter <= counter+1; 			--increase byte counter
             ELSE                             --next clock cycle of read state
@@ -186,7 +195,13 @@ BEGIN
             IF(ena = '1') THEN               --continue transaction
               busy <= '0';                   --continue is accepted
               addr_rw <= addr & rw;          --collect requested slave address and command
-              data_tx <= data_wr;            --collect requested data to write
+				  case counter is 					--collect requested data to write
+						when 0 => data_tx <= data_wr(7 downto 0) ;            
+						when 1 => data_tx <= data_wr(15 downto 8);
+						when 2 => data_tx <= data_wr(23 downto 16);
+						when 3 => data_tx <= data_wr(31 downto 24);
+						when others => data_tx <= data_wr(31 downto 24);
+				  end case;
               IF(addr_rw = addr & rw) THEN   --continue transaction with another write
                 sda_int <= data_wr(bit_cnt); --write first bit of data
                 state <= wr;                 --go to write byte
@@ -200,7 +215,13 @@ BEGIN
             IF(ena = '1') THEN               --continue transaction
               busy <= '0';                   --continue is accepted and data received is available on bus
               addr_rw <= addr & rw;          --collect requested slave address and command
-              data_tx <= data_wr;            --collect requested data to write
+              case counter is 					--collect requested data to write
+						when 0 => data_tx <= data_wr(7 downto 0) ;            
+						when 1 => data_tx <= data_wr(15 downto 8);
+						when 2 => data_tx <= data_wr(23 downto 16);
+						when 3 => data_tx <= data_wr(31 downto 24);
+						when others => data_tx <= data_wr(31 downto 24);
+				  end case;
               IF(addr_rw = addr & rw) THEN   --continue transaction with another read
                 sda_int <= '1';              --release sda from incoming data
                 state <= rd;                 --go to read byte
@@ -213,6 +234,7 @@ BEGIN
           WHEN stop =>                       --stop bit of transaction
             busy <= '0';                     --unflag busy
             state <= ready;                  --go to idle state
+				counter <= 0; 							--reset byte counter
         END CASE;    
       ELSIF(data_clk = '0' AND data_clk_prev = '1') THEN  --data clock falling edge
         CASE state IS

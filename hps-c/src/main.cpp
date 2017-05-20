@@ -59,8 +59,25 @@ int main(int argc, char *argv[]) {
 	 */
 
 	I2C* i2c = new I2C(h2p_lw_i2c_addr);
+	uint i=0;
+	while(i<10){
+		uint32_t reg33 = i2c->readSensor(0x00, 33);
+		bool dataOK = (reg33 >> 7) & 0b1;
+		int absPos = reg33;
 
-	i2c->readSensor(0x00);
+		uint32_t reg34 = i2c->readSensor(0x00, 34);
+		bool tooFar = (reg34 >> 6) & 0b1;
+		bool tooClose = (reg34 >> 5) & 0b1;
+
+		printf("reg 33: %X       reg 34: %X\n",reg33,reg34);
+		printf("dataOK:   %d\n", dataOK);
+		printf("tooFar:   %d\n", tooFar);
+		printf("tooClose: %d\n", tooClose);
+		printf("absPos:   %d\n", absPos, absPos);
+
+		usleep(10000);
+		i++;
+	}
 //	i2c->i2cRead(0x01,2);
 //	i2c->readSensor(0x00);
 

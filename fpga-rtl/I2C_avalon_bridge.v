@@ -23,8 +23,6 @@ module I2C_avalon_bridge (
 );
 
 reg [6:0] addr;
-reg [7:0] data_rd;
-reg [7:0] data_wr;
 reg rw;
 reg busy;
 reg ack_error;
@@ -32,12 +30,12 @@ reg ena;
 reg [2:0] number_of_bytes;
 wire [2:0] byte_counter;
 reg busy_prev;
-reg [31:0] data_read;
-reg [31:0] data_write;
+reg [31:0] data_rd;
+reg [31:0] data_wd;
 
 assign readdata = 
 	((address == 0))? addr :
-	((address == 1))? data_read :
+	((address == 1))? data_rd :
 	((address == 2))? rw :
 	((address == 3))? ena :
 	((address == 4))? busy :
@@ -46,15 +44,14 @@ assign readdata =
 	
 always @(posedge clock, posedge reset) begin: I2C_CONTROL_LOGIC
 	if (reset == 1) begin 
-		data_read <= 0;
-		data_write <= 0;
+		data_wd <= 0;
 		ena <= 0;
 	end else begin
 		// if we are writing via avalon bus and waitrequest is deasserted, write the respective register
 		if(write && ~waitrequest) begin
 			case(address)
 				0: addr <= writedata; 
-				1: data_write <= writedata; 
+				1: data_wd <= writedata; 
 				2: rw <= writedata; 
 				3: ena <= writedata;
 				4: number_of_bytes <= writedata;
@@ -62,21 +59,6 @@ always @(posedge clock, posedge reset) begin: I2C_CONTROL_LOGIC
 		end
 		if(byte_counter>=number_of_bytes) 
 			ena <= 0;
-		if( busy==0 ) begin
-			if (byte_counter == 0) begin
-				data_read[7:0] <= data_rd;
-				data_wr <= data_write[7:0];
-			end else if(byte_counter == 1) begin
-				data_read[15:0] <= data_rd;
-				data_wr <= data_write[15:0];
-			end else if(byte_counter == 2) begin
-				data_read[23:16] <= data_rd;
-				data_wr <= data_write[23:16];
-			end else if(byte_counter == 3) begin
-				data_read[31:24] <= data_rd;
-				data_wr <= data_write[31:24];
-			end
-		end
 	end 
 end
 
@@ -89,7 +71,7 @@ i2c_master i2c(
 	.ena(ena),
 	.addr(addr),
 	.rw(rw),
-	.data_wr(data_wr),
+	.data_wr(data_wd),
 	.busy(busy),
 	.data_rd(data_rd),
 	.ack_error(ack_error),

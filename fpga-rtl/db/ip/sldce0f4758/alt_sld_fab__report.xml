@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <deploy
- date="2017.05.18.23:48:10"
+ date="2017.05.20.14:02:50"
  outputDirectory="/home/roboy/workspace/fpgaI2C/fpga-rtl/db/ip/sldce0f4758/">
  <perimeter>
   <parameter
@@ -78,25 +78,25 @@
   </sourceFiles>
   <childSourceFiles>
    <file
-       path="/home/roboy/intelFPGA_lite/17.0/ip/altera/sld/core/altera_instrumentation_fabric/alt_sld_fab_hw.tcl" />
+       path="/home/roboy/intelFPGA/17.0/ip/altera/sld/core/altera_instrumentation_fabric/alt_sld_fab_hw.tcl" />
    <file
-       path="/home/roboy/intelFPGA_lite/17.0/ip/altera/sld/core/altera_instrumentation_fabric/com.altera.superfabric.jar" />
+       path="/home/roboy/intelFPGA/17.0/ip/altera/sld/core/altera_instrumentation_fabric/com.altera.superfabric.jar" />
    <file
-       path="/home/roboy/intelFPGA_lite/17.0/quartus/sopc_builder/model/lib/com.altera.utilities.jar" />
+       path="/home/roboy/intelFPGA/17.0/quartus/sopc_builder/model/lib/com.altera.utilities.jar" />
    <file
-       path="/home/roboy/intelFPGA_lite/17.0/quartus/sopc_builder/model/lib/hamcrest-all-1.3.jar" />
+       path="/home/roboy/intelFPGA/17.0/quartus/sopc_builder/model/lib/hamcrest-all-1.3.jar" />
    <file
-       path="/home/roboy/intelFPGA_lite/17.0/quartus/sopc_builder/model/lib/commons-lang3-3.1.jar" />
+       path="/home/roboy/intelFPGA/17.0/quartus/sopc_builder/model/lib/commons-lang3-3.1.jar" />
    <file
-       path="/home/roboy/intelFPGA_lite/17.0/quartus/sopc_builder/model/lib/javasysmon.jar" />
+       path="/home/roboy/intelFPGA/17.0/quartus/sopc_builder/model/lib/javasysmon.jar" />
    <file
-       path="/home/roboy/intelFPGA_lite/17.0/ip/altera/sld/core/altera_super_splitter/altera_super_splitter_hw.tcl" />
+       path="/home/roboy/intelFPGA/17.0/ip/altera/sld/core/altera_super_splitter/altera_super_splitter_hw.tcl" />
    <file
-       path="/home/roboy/intelFPGA_lite/17.0/ip/altera/sld/core/altera_super_splitter/altera_sld_splitter_hw.tcl" />
+       path="/home/roboy/intelFPGA/17.0/ip/altera/sld/core/altera_super_splitter/altera_sld_splitter_hw.tcl" />
    <file
-       path="/home/roboy/intelFPGA_lite/17.0/ip/altera/sld/jtag/altera_sld_jtag_hub/altera_sld_jtag_hub_hw.tcl" />
+       path="/home/roboy/intelFPGA/17.0/ip/altera/sld/jtag/altera_sld_jtag_hub/altera_sld_jtag_hub_hw.tcl" />
    <file
-       path="/home/roboy/intelFPGA_lite/17.0/ip/altera/sld/core/altera_connection_identification_hub/altera_connection_identification_hub_hw.tcl" />
+       path="/home/roboy/intelFPGA/17.0/ip/altera/sld/core/altera_connection_identification_hub/altera_connection_identification_hub_hw.tcl" />
   </childSourceFiles>
   <messages>
    <message level="Debug" culprit="alt_sld_fab">queue size: 0 starting:alt_sld_fab "alt_sld_fab"</message>
@@ -192,27 +192,27 @@
   </childGeneratedFiles>
   <sourceFiles>
    <file
-       path="/home/roboy/intelFPGA_lite/17.0/ip/altera/sld/core/altera_instrumentation_fabric/alt_sld_fab_hw.tcl" />
+       path="/home/roboy/intelFPGA/17.0/ip/altera/sld/core/altera_instrumentation_fabric/alt_sld_fab_hw.tcl" />
    <file
-       path="/home/roboy/intelFPGA_lite/17.0/ip/altera/sld/core/altera_instrumentation_fabric/com.altera.superfabric.jar" />
+       path="/home/roboy/intelFPGA/17.0/ip/altera/sld/core/altera_instrumentation_fabric/com.altera.superfabric.jar" />
    <file
-       path="/home/roboy/intelFPGA_lite/17.0/quartus/sopc_builder/model/lib/com.altera.utilities.jar" />
+       path="/home/roboy/intelFPGA/17.0/quartus/sopc_builder/model/lib/com.altera.utilities.jar" />
    <file
-       path="/home/roboy/intelFPGA_lite/17.0/quartus/sopc_builder/model/lib/hamcrest-all-1.3.jar" />
+       path="/home/roboy/intelFPGA/17.0/quartus/sopc_builder/model/lib/hamcrest-all-1.3.jar" />
    <file
-       path="/home/roboy/intelFPGA_lite/17.0/quartus/sopc_builder/model/lib/commons-lang3-3.1.jar" />
+       path="/home/roboy/intelFPGA/17.0/quartus/sopc_builder/model/lib/commons-lang3-3.1.jar" />
    <file
-       path="/home/roboy/intelFPGA_lite/17.0/quartus/sopc_builder/model/lib/javasysmon.jar" />
+       path="/home/roboy/intelFPGA/17.0/quartus/sopc_builder/model/lib/javasysmon.jar" />
   </sourceFiles>
   <childSourceFiles>
    <file
-       path="/home/roboy/intelFPGA_lite/17.0/ip/altera/sld/core/altera_super_splitter/altera_super_splitter_hw.tcl" />
+       path="/home/roboy/intelFPGA/17.0/ip/altera/sld/core/altera_super_splitter/altera_super_splitter_hw.tcl" />
    <file
-       path="/home/roboy/intelFPGA_lite/17.0/ip/altera/sld/core/altera_super_splitter/altera_sld_splitter_hw.tcl" />
+       path="/home/roboy/intelFPGA/17.0/ip/altera/sld/core/altera_super_splitter/altera_sld_splitter_hw.tcl" />
    <file
-       path="/home/roboy/intelFPGA_lite/17.0/ip/altera/sld/jtag/altera_sld_jtag_hub/altera_sld_jtag_hub_hw.tcl" />
+       path="/home/roboy/intelFPGA/17.0/ip/altera/sld/jtag/altera_sld_jtag_hub/altera_sld_jtag_hub_hw.tcl" />
    <file
-       path="/home/roboy/intelFPGA_lite/17.0/ip/altera/sld/core/altera_connection_identification_hub/altera_connection_identification_hub_hw.tcl" />
+       path="/home/roboy/intelFPGA/17.0/ip/altera/sld/core/altera_connection_identification_hub/altera_connection_identification_hub_hw.tcl" />
   </childSourceFiles>
   <instantiator instantiator="alt_sld_fab" as="alt_sld_fab" />
   <messages>
@@ -263,7 +263,7 @@
   <childGeneratedFiles/>
   <sourceFiles>
    <file
-       path="/home/roboy/intelFPGA_lite/17.0/ip/altera/sld/core/altera_super_splitter/altera_super_splitter_hw.tcl" />
+       path="/home/roboy/intelFPGA/17.0/ip/altera/sld/core/altera_super_splitter/altera_super_splitter_hw.tcl" />
   </sourceFiles>
   <childSourceFiles/>
   <instantiator instantiator="alt_sld_fab_alt_sld_fab" as="presplit" />
@@ -293,7 +293,7 @@
   <childGeneratedFiles/>
   <sourceFiles>
    <file
-       path="/home/roboy/intelFPGA_lite/17.0/ip/altera/sld/core/altera_super_splitter/altera_sld_splitter_hw.tcl" />
+       path="/home/roboy/intelFPGA/17.0/ip/altera/sld/core/altera_super_splitter/altera_sld_splitter_hw.tcl" />
   </sourceFiles>
   <childSourceFiles/>
   <instantiator instantiator="alt_sld_fab_alt_sld_fab" as="splitter" />
@@ -336,7 +336,7 @@
   <childGeneratedFiles/>
   <sourceFiles>
    <file
-       path="/home/roboy/intelFPGA_lite/17.0/ip/altera/sld/jtag/altera_sld_jtag_hub/altera_sld_jtag_hub_hw.tcl" />
+       path="/home/roboy/intelFPGA/17.0/ip/altera/sld/jtag/altera_sld_jtag_hub/altera_sld_jtag_hub_hw.tcl" />
   </sourceFiles>
   <childSourceFiles/>
   <instantiator instantiator="alt_sld_fab_alt_sld_fab" as="sldfabric" />
@@ -364,7 +364,7 @@
   <childGeneratedFiles/>
   <sourceFiles>
    <file
-       path="/home/roboy/intelFPGA_lite/17.0/ip/altera/sld/core/altera_connection_identification_hub/altera_connection_identification_hub_hw.tcl" />
+       path="/home/roboy/intelFPGA/17.0/ip/altera/sld/core/altera_connection_identification_hub/altera_connection_identification_hub_hw.tcl" />
   </sourceFiles>
   <childSourceFiles/>
   <instantiator instantiator="alt_sld_fab_alt_sld_fab" as="ident" />
