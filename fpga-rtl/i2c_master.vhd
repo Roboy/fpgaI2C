@@ -49,7 +49,8 @@ ENTITY i2c_master IS
     ack_error : BUFFER STD_LOGIC;                    --flag if improper acknowledge from slave
     sda       : INOUT  STD_LOGIC;                    --serial data output of i2c bus
     scl       : INOUT  STD_LOGIC;                   --serial clock output of i2c bus
-	 byte_counter : OUT INTEGER RANGE 0 TO 7); 		  --how many bytes are sent or received
+	 byte_counter : OUT INTEGER RANGE 0 TO 7;				--how many bytes have been sent or received
+	 number_of_bytes : IN INTEGER RANGE 0 TO 7);     --how many bytes should be sent or received in tota
 END i2c_master;
 
 ARCHITECTURE logic OF i2c_master IS
@@ -123,11 +124,11 @@ BEGIN
           WHEN ready =>                      --idle state
             IF(ena = '1') THEN               --transaction requested
               busy <= '1';                   --flag busy
-					IF(rw = '1') THEN					--if we want to read
-						addr_rw <= addr & (not rw);       --write register first
-					ELSE
-						addr_rw <= addr & rw;		--collect requested slave address and command
-					END IF;
+				  IF(rw = '1') THEN
+					addr_rw <= addr & (not rw);   --we need to write the register we want to read from first
+				  ELSE
+					addr_rw <= addr & rw;          --collect requested slave address and command
+				  END IF;
               data_tx <= data_wr(7 downto 0) ;            --collect requested data to write
               state <= start;                --go to start bit
             ELSE                             --remain idle
@@ -162,7 +163,7 @@ BEGIN
             IF(bit_cnt = 0) THEN             --write byte transmit finished
               sda_int <= '1';                --release sda for slave acknowledge
               bit_cnt <= 7;                  --reset bit counter for "byte" states
-              state <= slv_ack2;             --go to slave acknowledge (write)
+				  state <= slv_ack2;             --go to slave acknowledge (write)
 				  counter <= counter+1; 			--increase byte counter
             ELSE                             --next clock cycle of write state
               bit_cnt <= bit_cnt - 1;        --keep track of transaction bits
@@ -172,7 +173,7 @@ BEGIN
           WHEN rd =>                         --read byte of transaction
             busy <= '1';                     --resume busy if continuous mode
             IF(bit_cnt = 0) THEN             --read byte receive finished
-              IF(ena = '1' AND addr_rw = addr & rw) THEN  --continuing with another read at same address
+              IF( counter < number_of_bytes-1 AND addr_rw = addr & rw ) THEN  				--continuing with another read at same address
                 sda_int <= '0';              --acknowledge the byte has been received
               ELSE                           --stopping or continuing with a write
                 sda_int <= '1';              --send a no-acknowledge (before stop or repeated start)
@@ -183,58 +184,58 @@ BEGIN
 						when 2 => data_rd(15 downto 8) <= data_rx;
 						when 3 => data_rd(23 downto 16) <= data_rx;
 						when 4 => data_rd(31 downto 24) <= data_rx;
-						when others => data_rd(31 downto 24) <= data_rx;
+						when others => NULL;
 				  end case;
-              state <= mstr_ack;             --go to master acknowledge
+   			  state <= mstr_ack;             --go to master acknowledge
 				  counter <= counter+1; 			--increase byte counter
             ELSE                             --next clock cycle of read state
               bit_cnt <= bit_cnt - 1;        --keep track of transaction bits
               state <= rd;                   --continue reading
             END IF;
           WHEN slv_ack2 =>                   --slave acknowledge bit (write)
-            IF(ena = '1') THEN               --continue transaction
-              busy <= '0';                   --continue is accepted
-              addr_rw <= addr & rw;          --collect requested slave address and command
+				IF( counter < number_of_bytes ) THEN               --continue transaction
+				  busy <= '0';                   --continue is accepted
 				  case counter is 					--collect requested data to write
 						when 0 => data_tx <= data_wr(7 downto 0) ;            
 						when 1 => data_tx <= data_wr(15 downto 8);
 						when 2 => data_tx <= data_wr(23 downto 16);
 						when 3 => data_tx <= data_wr(31 downto 24);
-						when others => data_tx <= data_wr(31 downto 24);
+						when others => NULL;
 				  end case;
-              IF(addr_rw = addr & rw) THEN   --continue transaction with another write
-                sda_int <= data_wr(bit_cnt); --write first bit of data
-                state <= wr;                 --go to write byte
-              ELSE                           --continue transaction with a read or new slave
-                state <= start;              --go to repeated start
-              END IF;
-            ELSE                             --complete transaction
-              state <= stop;                 --go to stop bit
-            END IF;
+				  IF(addr_rw = addr & rw) THEN   --continue transaction with another write
+					 sda_int <= data_wr(bit_cnt); --write first bit of data
+					 state <= wr;                 --go to write byte
+				  ELSE                           --continue transaction with a read or new slave
+					 state <= start;              --go to repeated start
+					 addr_rw <= addr & rw;        --here we use the true rw value (in case of read = 1)
+				  END IF;
+				ELSE                             --complete transaction
+				  state <= stop;                 --go to stop bit
+				END IF;
           WHEN mstr_ack =>                   --master acknowledge bit after a read
-            IF(ena = '1') THEN               --continue transaction
-              busy <= '0';                   --continue is accepted and data received is available on bus
-              addr_rw <= addr & rw;          --collect requested slave address and command
-              case counter is 					--collect requested data to write
+				IF( counter < number_of_bytes ) THEN               --continue transaction
+				  busy <= '0';                   --continue is accepted and data received is available on bus
+				  addr_rw <= addr & rw;          --collect requested slave address and command
+				  case counter is 					--collect requested data to write
 						when 0 => data_tx <= data_wr(7 downto 0) ;            
 						when 1 => data_tx <= data_wr(15 downto 8);
 						when 2 => data_tx <= data_wr(23 downto 16);
 						when 3 => data_tx <= data_wr(31 downto 24);
-						when others => data_tx <= data_wr(31 downto 24);
+						when others => NULL;
 				  end case;
-              IF(addr_rw = addr & rw) THEN   --continue transaction with another read
-                sda_int <= '1';              --release sda from incoming data
-                state <= rd;                 --go to read byte
-              ELSE                           --continue transaction with a write or new slave
-                state <= start;              --repeated start
-              END IF;    
-            ELSE                             --complete transaction
-              state <= stop;                 --go to stop bit
-            END IF;
+				  IF(addr_rw = addr & rw) THEN   --continue transaction with another read
+					 sda_int <= '1';              --release sda from incoming data
+					 state <= rd;                 --go to read byte
+				  ELSE                           --continue transaction with a write or new slave
+					 state <= start;              --repeated start
+				  END IF;    
+				ELSE                             --complete transaction
+				  state <= stop;                 --go to stop bit
+				END IF;
           WHEN stop =>                       --stop bit of transaction
             busy <= '0';                     --unflag busy
             state <= ready;                  --go to idle state
-				counter <= 0; 							--reset byte counter
+				counter <= number_of_bytes;
         END CASE;    
       ELSIF(data_clk = '0' AND data_clk_prev = '1') THEN  --data clock falling edge
         CASE state IS

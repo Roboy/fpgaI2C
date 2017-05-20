@@ -62,8 +62,8 @@ public:
 	const uint8_t opt_write = 0;
 	const uint8_t opt_read = 1;
 
-	void i2cWrite(uint8_t i2cAddr, uint32_t data, uint8_t number_of_bytes);
-	uint32_t i2cRead(uint8_t i2cAddr, uint8_t reg, uint8_t number_of_bytes);
+	void write(uint8_t i2cAddr, uint32_t data, uint8_t number_of_bytes);
+	uint32_t read(uint8_t i2cAddr, uint8_t reg, uint8_t number_of_bytes);
 	uint32_t readSensor(uint8_t i2cAddr, uint8_t reg);
 
 };

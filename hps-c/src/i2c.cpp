@@ -5,10 +5,11 @@ I2C::I2C(void * baseAddr) {
 }
 
 uint32_t I2C::readSensor(uint8_t i2cAddr, uint8_t reg){
-	return i2cRead(0x00,reg,2);
+	return read(0x00,reg,2);
 }
 
-void I2C::i2cWrite(uint8_t i2cAddr, uint32_t data, uint8_t number_of_bytes) {
+void I2C::write(uint8_t i2cAddr, uint32_t data, uint8_t number_of_bytes) {
+	usleep(1);
 	// Set slave address
 	IOWR(h2p_lw_i2c_addr, reg_addr, i2cAddr);
 	// Set data to write
@@ -22,7 +23,8 @@ void I2C::i2cWrite(uint8_t i2cAddr, uint32_t data, uint8_t number_of_bytes) {
 }
 
 
-uint32_t I2C::i2cRead(uint8_t i2cAddr, uint8_t reg, uint8_t number_of_bytes) {
+uint32_t I2C::read(uint8_t i2cAddr, uint8_t reg, uint8_t number_of_bytes) {
+	usleep(1);
 	// Set slave address
 	IOWR(h2p_lw_i2c_addr, reg_addr, i2cAddr);
 	// Set operation mode: read
