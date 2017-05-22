@@ -7,7 +7,7 @@
 #include "socal/hps.h"
 #include "socal/alt_gpio.h"
 #include "hps_0.h"
-#include "mlp3115A2.hpp"
+#include "am4096.hpp"
 #include <limits.h>
 
 #define HW_REGS_BASE ( ALT_STM_OFST )
@@ -39,10 +39,23 @@ int main(int argc, char *argv[]) {
 	h2p_lw_i2c_addr = virtual_base + ( (unsigned long) ( ALT_LWFPGASLVS_OFST + I2C_AVALON_BRIDGE_0_BASE ) & (unsigned long) ( HW_REGS_MASK ) );
 
 
-	MLP3115A2 pressure_sensor(h2p_lw_i2c_addr);
+	AM4096 jointAngle(h2p_lw_i2c_addr);
 	while(true){
-	float val = pressure_sensor.readPressure();
-	printf("%f\n", val);
+		uint32_t absAngle, relAngle, tacho;
+		uint8_t agcGain;
+		bool dataOKAbs, dataOKRel, tooFar, tooClose, tachoOverflow;
+		dataOKAbs = jointAngle.readAbsAngle(0x00, absAngle);
+		dataOKRel = jointAngle.readRelAngle(0x00, relAngle);
+		jointAngle.readMagnetStatus(0x00, tooFar, tooClose);
+		tachoOverflow = jointAngle.readTacho(0x00, tacho);
+		jointAngle.readAgcGain(0x00, agcGain);
+		printf("magnet   %s\n", (tooFar ? "too far" : (tooClose ? "too close" : "ok")));
+		printf("agc gain %d\n", agcGain);
+		printf("absPos   %d, %s\n", absAngle, (dataOKAbs     ? "not ok" : "ok"));
+		printf("relPos   %d, %s\n", relAngle, (dataOKRel     ? "not ok" : "ok"));
+		printf("tacho    %d, %s\n", tacho,    (tachoOverflow ? "not ok" : "ok"));
+		printf("\n");
+		usleep(100000);
 	}
 
 

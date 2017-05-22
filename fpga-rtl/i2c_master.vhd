@@ -179,11 +179,11 @@ BEGIN
                 sda_int <= '1';              --send a no-acknowledge (before stop or repeated start)
               END IF;
               bit_cnt <= 7;                  --reset bit counter for "byte" states
-				  case counter is 					--output received data
-						when 1 => data_rd(7 downto 0) <= data_rx;            
-						when 2 => data_rd(15 downto 8) <= data_rx;
-						when 3 => data_rd(23 downto 16) <= data_rx;
-						when 4 => data_rd(31 downto 24) <= data_rx;
+				  case counter is 					--output received data (MSB first)
+						when 4 => data_rd(7 downto 0) <= data_rx;            
+						when 3 => data_rd(15 downto 8) <= data_rx;
+						when 2 => data_rd(23 downto 16) <= data_rx;
+						when 1 => data_rd(31 downto 24) <= data_rx;
 						when others => NULL;
 				  end case;
    			  state <= mstr_ack;             --go to master acknowledge
@@ -195,11 +195,11 @@ BEGIN
           WHEN slv_ack2 =>                   --slave acknowledge bit (write)
 				IF( counter < number_of_bytes ) THEN               --continue transaction
 				  busy <= '0';                   --continue is accepted
-				  case counter is 					--collect requested data to write
-						when 0 => data_tx <= data_wr(7 downto 0) ;            
-						when 1 => data_tx <= data_wr(15 downto 8);
-						when 2 => data_tx <= data_wr(23 downto 16);
-						when 3 => data_tx <= data_wr(31 downto 24);
+				  case counter is 					--collect requested data to write (MSB first)
+						when 3 => data_tx <= data_wr(7 downto 0) ;            
+						when 2 => data_tx <= data_wr(15 downto 8);
+						when 1 => data_tx <= data_wr(23 downto 16);
+						when 0 => data_tx <= data_wr(31 downto 24); 
 						when others => NULL;
 				  end case;
 				  IF(addr_rw = addr & rw) THEN   --continue transaction with another write
@@ -216,11 +216,11 @@ BEGIN
 				IF( counter < number_of_bytes ) THEN               --continue transaction
 				  busy <= '0';                   --continue is accepted and data received is available on bus
 				  addr_rw <= addr & rw;          --collect requested slave address and command
-				  case counter is 					--collect requested data to write
-						when 0 => data_tx <= data_wr(7 downto 0) ;            
-						when 1 => data_tx <= data_wr(15 downto 8);
-						when 2 => data_tx <= data_wr(23 downto 16);
-						when 3 => data_tx <= data_wr(31 downto 24);
+				  case counter is 					--collect requested data to write (MSB first)
+						when 3 => data_tx <= data_wr(7 downto 0) ;            
+						when 2 => data_tx <= data_wr(15 downto 8);
+						when 1 => data_tx <= data_wr(23 downto 16);
+						when 0 => data_tx <= data_wr(31 downto 24);
 						when others => NULL;
 				  end case;
 				  IF(addr_rw = addr & rw) THEN   --continue transaction with another read
